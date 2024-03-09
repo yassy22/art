@@ -42,7 +42,6 @@ function App() {
       </div>
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
-          
           <Circles count={circleCount} radius={radius} />
         </svg>
       </div>
