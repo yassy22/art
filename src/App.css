@@ -1,0 +1,12 @@
+/* App.css */
+.App {
+  text-align: center;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.controls > div {
+  margin: 10px;
+}
