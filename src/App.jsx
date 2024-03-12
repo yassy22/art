@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Circles from "./components/Circles";
 import Slider from "./components/Slider";
+import Lins from "./components/Lins";
 
 // import Line from './components/Line';
 function App() {
@@ -36,7 +37,6 @@ function App() {
           value={radius}
           onValueChange={(v) => handleRadiusChange(v)}
         />
-
         <Slider
           max={50}
           label="count"
@@ -48,10 +48,10 @@ function App() {
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
           <Circles count={circleCount} radius={radius} color={circleColor} />
+          <Lins />
         </svg>
       </div>
     </div>
   );
 }
-
 export default App;
