@@ -20,7 +20,11 @@ function App() {
     setStyle({ ...style, circleCount });
   };
 
-  const { radius, circleCount } = style;
+  const handleColorChange = (e) => {
+    setStyle({ ...style, circleColor: e.target.value });
+  };
+
+  const { radius, circleCount, circleColor } = style;
 
   return (
     <div className="App">
@@ -39,10 +43,11 @@ function App() {
           value={circleCount}
           onValueChange={(v) => handleChannelChange(v)}
         />
+        <input type="color" value={circleColor} onChange={handleColorChange} />
       </div>
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
-          <Circles count={circleCount} radius={radius} />
+          <Circles count={circleCount} radius={radius} color={circleColor} />
         </svg>
       </div>
     </div>

@@ -10,3 +10,7 @@
 .controls > div {
   margin: 10px;
 }
+
+.svg-container {
+  background-color: #343B55;
+}
