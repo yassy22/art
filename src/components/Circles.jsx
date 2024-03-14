@@ -1,25 +1,30 @@
 // Circles.js
-import React from "react";
 
-const Circles = ({ count, radius, color }) => {
+const Circles = ({ count, radius }) => {
   const circles = [];
+  const centerX = 200;
+  const centerY = 200;
+
+  const stepSize = 32;
+
+  // Dupliceren van de cirkels met een groeiende straal
   for (let i = 0; i < count; i++) {
-    const cx = Math.random() * 200 + 50;
-    const cy = Math.random() * 200 + 50;
-    radius = Math.random() * 30 + 10;
+    // Voeg de cirkel toe aan de array
     circles.push(
       <circle
-        key={i}
-        cx={400 / 2}
-        cy={400 / 2}
+        key={`circle${i}`}
+        cx={centerX}
+        cy={centerY}
         r={radius}
-        stroke={color}
+        stroke="#CACBD1"
+        strokeWidth="0.1"
         fill="none"
       />
-      // <rect key={i} x={cy} y={cx} width={radius} height={radius} fill={color} />
     );
-  }
 
+    // Pas de straal aan voor de volgende cirkel
+    radius += stepSize; // Groeisnelheid
+  }
   return circles;
 };
 

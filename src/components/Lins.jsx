@@ -1,35 +1,41 @@
 // Circles.js
 import React from "react";
 
-const Lins = () => {
+const Lins = ({ countLine, widthLine }) => {
   const lines = [];
-  const numLines = 30;
   const radius = 40;
 
   const centerX = 400 / 2;
   const centerY = 400 / 2;
 
-  for (let i = 0; i < numLines; i++) {
-    // Bereken de hoek in radialen
-    const angle = (i / numLines) * 2 * Math.PI;
+  for (let e = 0; e < countLine; e++) {
+    const angle = (e / countLine) * 2 * Math.PI;
 
-    // Bereken de eindpunten van de lijn
     const x1 = centerX + radius * Math.cos(angle);
     const y1 = centerY + radius * Math.sin(angle);
-    const x2 = centerX + (radius + 400) * Math.cos(angle); // Verander 50 naar de gewenste lengte van de lijn
-    const y2 = centerY + (radius + 400) * Math.sin(angle); // Verander 50 naar de gewenste lengte van de lijn
+    const x2 = centerX + (radius + 700) * Math.cos(angle); // Verander 50 naar de gewenste lengte van de lijn
+    const y2 = centerY + (radius + 700) * Math.sin(angle); // Verander 50 naar de gewenste lengte van de lijn
 
     // Voeg de lijn toe aan de array
     lines.push(
       <line
-        key={`line${i}`}
+        key={`line${e}`}
         x1={x1}
         y1={y1}
         x2={x2}
         y2={y2}
-        stroke="black"
-        strokeWidth="2"
+        stroke="#CACBD1"
+        strokeWidth={widthLine}
       />
+
+      // <polyline
+      //   class="st0"
+      //   points="30,50 100,160 220,40 "
+      //   fill="none"
+      //   stroke="#CACBD1"
+      // />,
+      // <circle cx="30" cy="47" r="7" />,
+      // <circle cx="220" cy="40" r="7" />
     );
   }
 
