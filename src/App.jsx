@@ -11,6 +11,7 @@ function App() {
     numLines: 30,
     lineWidht: 0.1,
   });
+
   const [style, setStyle] = useState({
     radius: 30,
     circleCount: 10,
@@ -46,10 +47,8 @@ function App() {
   const handelChangeEtoilex1 = (x1) => {
     setEtoile({ ...etoile, x1 });
   };
-
-  const handelColorChange = (circleColor) => {
-    setStyle({ ...style, circleColor });
-    circleColor.target.value;
+  const handleColorChange = (e) => {
+    setStyle({ ...style, circleColor: e.target.value });
   };
 
   const { radius, circleCount, circleColor } = style;
@@ -81,7 +80,6 @@ function App() {
             onValueChange={(v) => handleLineWidhtChange(v)}
           />
         </div>
-
         <Slider
           max={50}
           label="randomePos"
@@ -95,7 +93,7 @@ function App() {
           onValueChange={(v) => handelChangeEtoilex1(v)}
         />
 
-        <input type="color" value={circleColor} onChange={handelColorChange} />
+        <input type="color" value={circleColor} onChange={handleColorChange} />
       </div>
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
