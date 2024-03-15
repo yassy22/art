@@ -1,11 +1,8 @@
 // App.js
 import "./App.css";
 import React, { useState } from "react";
-import Circles from "./components/Circles";
 import Slider from "./components/Slider";
-import Lins from "./components/Lins";
-import Etoile from "./components/Etoile";
-import PropTypes from "prop-types";
+import CosmosContainer from "./components/CosmosContainer";
 
 const generateItem = () => ({
   x1: Math.random() * 400,
@@ -54,7 +51,6 @@ function App() {
     //     return tmpItem;
     //   })
     // );
-
     const updatedItems = items.map((item) => ({ ...item, radius: value }));
     setItems(updatedItems);
   };
@@ -85,13 +81,13 @@ function App() {
           max={50}
           label="Radius"
           value={radius}
-          onValueChange={(v) => handleRadiusChange(v)}
+          onValueChange={handleRadiusChange}
         />
         <Slider
           max={50}
           label="count"
           value={circleCount}
-          onValueChange={(v) => handleChannelChange(v)}
+          onValueChange={handleChannelChange}
         />
 
         <div className="lineInput">
@@ -99,14 +95,14 @@ function App() {
             max={100}
             label="lineWidht"
             value={lineWidht}
-            onValueChange={(v) => handleLineWidhtChange(v)}
+            onValueChange={handleLineWidhtChange}
           />
         </div>
         <Slider
           max={50}
           label="sterren radius"
           value={radiuss}
-          onValueChange={(v) => handelChangeEtoile(v)}
+          onValueChange={handelChangeEtoile}
         />
 
         <input type="color" value={circleColor} onChange={handleColorChange} />
@@ -119,11 +115,14 @@ function App() {
         </button>
       </div>
       <div className="svg-container">
-        <svg viewBox="0 0 400 400">
-          <Lins countLine={numLines} widthLine={lineWidht} />
-          <Circles count={circleCount} radius={radius} color={circleColor} />
-          <Etoile items={items} />
-        </svg>
+        <CosmosContainer
+          numLines={numLines}
+          lineWidht={lineWidht}
+          circleCount={circleCount}
+          radius={radius}
+          circleColor={circleColor}
+          items={items}
+        />
       </div>
     </div>
   );
