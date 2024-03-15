@@ -27,15 +27,6 @@ const Lins = ({ countLine, widthLine }) => {
         stroke="#CACBD1"
         strokeWidth={widthLine}
       />
-
-      // <polyline
-      //   class="st0"
-      //   points="30,50 100,160 220,40 "
-      //   fill="none"
-      //   stroke="#CACBD1"
-      // />,
-      // <circle cx="30" cy="47" r="7" />,
-      // <circle cx="220" cy="40" r="7" />
     );
   }
 

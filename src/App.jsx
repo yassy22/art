@@ -18,7 +18,13 @@ function App() {
   });
 
   const [etoile, setEtoile] = useState({
-    changeRandome: 0,
+    changeRandome: 3,
+    x1: 10,
+    y1: 0,
+    x2: 0,
+    y2: 0,
+    cx1: 0,
+    cy1: 0,
   });
 
   const handleRadiusChange = (radius) => {
@@ -35,12 +41,20 @@ function App() {
 
   const handelChangeEtoile = (changeRandome) => {
     setEtoile({ ...etoile, changeRandome });
-    console.log(changeRandome);
+  };
+
+  const handelChangeEtoilex1 = (x1) => {
+    setEtoile({ ...etoile, x1 });
+  };
+
+  const handelColorChange = (circleColor) => {
+    setStyle({ ...style, circleColor });
+    circleColor.target.value;
   };
 
   const { radius, circleCount, circleColor } = style;
   const { numLines, lineWidht } = lineStle;
-  const { changeRandome } = etoile;
+  const { changeRandome, x1, y1, x2, y2, cx1, cy1 } = etoile;
 
   return (
     <div className="App">
@@ -61,7 +75,7 @@ function App() {
 
         <div className="lineInput">
           <Slider
-            max={50}
+            max={100}
             label="lineWidht"
             value={lineWidht}
             onValueChange={(v) => handleLineWidhtChange(v)}
@@ -74,12 +88,28 @@ function App() {
           value={changeRandome}
           onValueChange={(v) => handelChangeEtoile(v)}
         />
+        <Slider
+          max={200}
+          label="x1"
+          value={x1}
+          onValueChange={(v) => handelChangeEtoilex1(v)}
+        />
+
+        <input type="color" value={circleColor} onChange={handelColorChange} />
       </div>
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
           <Lins countLine={numLines} widthLine={lineWidht} />
           <Circles count={circleCount} radius={radius} color={circleColor} />
-          <Etoile randome={changeRandome} />
+          <Etoile
+            randome={changeRandome}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            cx1={cx1}
+            cy1={cy1}
+          />
         </svg>
       </div>
     </div>
