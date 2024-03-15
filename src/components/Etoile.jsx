@@ -1,31 +1,49 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Etoile = ({ randome, x1, y1, x2, y2, cx1, cy1 }) => {
+const Etoile = ({ items }) => {
   const etoils = [];
-
-  for (let i = 0; i < randome; i++) {
-    x1 = Math.random() * 400;
-    y1 = Math.random() * 400;
-    x2 = Math.random() * 400;
-    y2 = Math.random() * 400;
-    cx1 = Math.random() * 400;
-    cy1 = Math.random() * 400;
-
+  console.log(items);
+  items.forEach((item, index) => {
     etoils.push(
-      <polyline
-        key={`line${i}`}
-        points={`${x1},${y1} ${x2},${y2} ${cx1},${cy1}`}
-        fill="none"
-        stroke="#CACBD1"
-        strokeWidth="0.2"
-      />,
-      <circle key={`ellips${i}`} cx={x1} cy={y1} r="2" fill="yellow" />,
-      <circle key={`ellipse1${i}`} cx={x2} cy={y2} r="2" fill="yellow" />,
-      <circle key={`ellipse2${i}`} cx={cx1} cy={cy1} r="2" fill="yellow" />
+      <g key={`line${index}`}>
+        <polyline
+          key={`line${index}`}
+          points={`${item.x1},${item.y1} ${item.x2},${item.y2} ${item.cx1},${item.cy1}`}
+          fill="none"
+          stroke="#CACBD1"
+          strokeWidth="0.2"
+        />
+        ,
+        <circle key={`ellips`} cx={item.x1} cy={item.y1} r="2" fill="yellow" />,
+        <circle
+          key={`ellipse1`}
+          cx={item.x2}
+          cy={item.y2}
+          r="2"
+          fill="yellow"
+        />
+        ,
+        <circle
+          key={`ellipse2`}
+          cx={item.cx1}
+          cy={item.cy1}
+          r={item.radius}
+          fill="yellow"
+        />
+      </g>
     );
-  }
-
+  });
   return etoils;
+};
+Etoile.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      cx1: PropTypes.number.isRequired,
+      cy1: PropTypes.number.isRequired,
+      radius: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Etoile;

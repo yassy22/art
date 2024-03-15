@@ -5,7 +5,17 @@ import Circles from "./components/Circles";
 import Slider from "./components/Slider";
 import Lins from "./components/Lins";
 import Etoile from "./components/Etoile";
+import PropTypes from "prop-types";
 
+const generateItem = () => ({
+  x1: Math.random() * 400,
+  y1: Math.random() * 400,
+  x2: Math.random() * 400,
+  y2: Math.random() * 400,
+  cx1: Math.random() * 400,
+  cy1: Math.random() * 400,
+  radius: 5,
+});
 function App() {
   const [lineStle, setLineStyle] = useState({
     numLines: 30,
@@ -15,18 +25,12 @@ function App() {
   const [style, setStyle] = useState({
     radius: 30,
     circleCount: 10,
-    circleColor: "#ff0000",
+    circleColor: "#c3ccdb",
   });
 
-  const [etoile, setEtoile] = useState({
-    changeRandome: 3,
-    x1: 10,
-    y1: 0,
-    x2: 0,
-    y2: 0,
-    cx1: 0,
-    cy1: 0,
-  });
+  const defaultList = new Array(4).fill().map(() => generateItem());
+  const [radiuss, setRadius] = useState(5);
+  const [items, setItems] = useState(defaultList);
 
   const handleRadiusChange = (radius) => {
     setStyle({ ...style, radius });
@@ -40,20 +44,38 @@ function App() {
     setLineStyle({ ...lineStle, lineWidht });
   };
 
-  const handelChangeEtoile = (changeRandome) => {
-    setEtoile({ ...etoile, changeRandome });
+  const handelChangeEtoile = (value) => {
+    setRadius(value);
+    // const tmpItems = [...items];
+    // setItems(
+    //   tmpItems.map((item) => {
+    //     const tmpItem = { ...item };
+    //     tmpItem.radius = value;
+    //     return tmpItem;
+    //   })
+    // );
+
+    const updatedItems = items.map((item) => ({ ...item, radius: value }));
+    setItems(updatedItems);
   };
 
-  const handelChangeEtoilex1 = (x1) => {
-    setEtoile({ ...etoile, x1 });
+  const handleAddItem = () => {
+    const newItem = generateItem();
+    setItems([...items, newItem]);
   };
+
+  const handleRemoveItem = () => {
+    const tmpItems = [...items];
+    tmpItems.pop();
+    setItems(tmpItems);
+  };
+
   const handleColorChange = (e) => {
     setStyle({ ...style, circleColor: e.target.value });
   };
 
   const { radius, circleCount, circleColor } = style;
   const { numLines, lineWidht } = lineStle;
-  const { changeRandome, x1, y1, x2, y2, cx1, cy1 } = etoile;
 
   return (
     <div className="App">
@@ -82,32 +104,25 @@ function App() {
         </div>
         <Slider
           max={50}
-          label="randomePos"
-          value={changeRandome}
+          label="sterren radius"
+          value={radiuss}
           onValueChange={(v) => handelChangeEtoile(v)}
-        />
-        <Slider
-          max={200}
-          label="x1"
-          value={x1}
-          onValueChange={(v) => handelChangeEtoilex1(v)}
         />
 
         <input type="color" value={circleColor} onChange={handleColorChange} />
+
+        <button className="AddButton button" onClick={handleAddItem}>
+          +
+        </button>
+        <button className="removeButton" onClick={handleRemoveItem}>
+          -
+        </button>
       </div>
       <div className="svg-container">
         <svg viewBox="0 0 400 400">
           <Lins countLine={numLines} widthLine={lineWidht} />
           <Circles count={circleCount} radius={radius} color={circleColor} />
-          <Etoile
-            randome={changeRandome}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            cx1={cx1}
-            cy1={cy1}
-          />
+          <Etoile items={items} />
         </svg>
       </div>
     </div>
