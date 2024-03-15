@@ -11,18 +11,19 @@ const CosmosContainer = ({
   radius,
   circleColor,
   items,
+  gradient,
 }) => {
   return (
     <div className="svg-container">
       <svg viewBox="0 0 400 400">
+        {/* <defs>{gradient}</defs> */}
         <Lins countLine={numLines} widthLine={lineWidht} />
         <Circles count={circleCount} radius={radius} color={circleColor} />
-        <Etoiles items={items} />
+        <Etoiles items={items}  gradient={gradient}/>
       </svg>
     </div>
   );
 };
-
 CosmosContainer.propTypes = {
   numLines: PropTypes.number.isRequired,
   lineWidht: PropTypes.number.isRequired,

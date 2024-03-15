@@ -14,6 +14,13 @@ const generateItem = () => ({
   radius: 5,
 });
 function App() {
+  const gradient = (
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.1" />
+      <stop offset="50%" stopColor="#ffff00" stopOpacity="0.5" />
+      <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
+    </linearGradient>
+  );
   const [lineStle, setLineStyle] = useState({
     numLines: 30,
     lineWidht: 0.1,
@@ -122,6 +129,7 @@ function App() {
           radius={radius}
           circleColor={circleColor}
           items={items}
+          gradient={gradient}
         />
       </div>
     </div>

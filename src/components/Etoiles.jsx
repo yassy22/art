@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Etoile = ({ items }) => {
+const Etoile = ({ items, gradient }) => {
   const etoils = [];
   console.log(items);
   items.forEach((item, index) => {
     etoils.push(
       <g key={`line${index}`}>
+        <defs>{gradient}</defs>
         <polyline
           key={`line${index}`}
           points={`${item.x1},${item.y1} ${item.x2},${item.y2} ${item.cx1},${item.cy1}`}
@@ -29,7 +30,7 @@ const Etoile = ({ items }) => {
           cx={item.cx1}
           cy={item.cy1}
           r={item.radius}
-          fill="yellow"
+          fill={`url(#gradient)`}
         />
       </g>
     );
