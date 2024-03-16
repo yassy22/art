@@ -8,8 +8,8 @@ const Slider = ({ onValueChange, value, max, min = 0, label }) => {
         max={max}
         value={value}
         onChange={(e) => onValueChange(parseInt(e.target.value, 10))}
+        className="slider"
       />
-      <span>{value}</span>
     </label>
   );
 };

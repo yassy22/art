@@ -5,8 +5,8 @@ const Lins = ({ countLine, widthLine }) => {
   const lines = [];
   const radius = 40;
 
-  const centerX = 400 / 2;
-  const centerY = 400 / 2;
+  const centerX = 800 / 2;
+  const centerY = 800 / 2;
 
   for (let e = 0; e < countLine; e++) {
     const angle = (e / countLine) * 2 * Math.PI;

@@ -2,8 +2,8 @@
 
 const Circles = ({ count, radius, color }) => {
   const circles = [];
-  const centerX = 200;
-  const centerY = 200;
+  const centerX = 400;
+  const centerY = 400;
 
   const stepSize = 32;
 

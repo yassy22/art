@@ -15,11 +15,10 @@ const CosmosContainer = ({
 }) => {
   return (
     <div className="svg-container">
-      <svg viewBox="0 0 400 400">
-        {/* <defs>{gradient}</defs> */}
+      <svg viewBox="0 0 800 800">
         <Lins countLine={numLines} widthLine={lineWidht} />
         <Circles count={circleCount} radius={radius} color={circleColor} />
-        <Etoiles items={items}  gradient={gradient}/>
+        <Etoiles items={items} gradient={gradient} />
       </svg>
     </div>
   );

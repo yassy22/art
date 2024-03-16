@@ -5,12 +5,12 @@ import Slider from "./components/Slider";
 import CosmosContainer from "./components/CosmosContainer";
 
 const generateItem = () => ({
-  x1: Math.random() * 400,
-  y1: Math.random() * 400,
-  x2: Math.random() * 400,
-  y2: Math.random() * 400,
-  cx1: Math.random() * 400,
-  cy1: Math.random() * 400,
+  x1: Math.random() * 800,
+  y1: Math.random() * 800,
+  x2: Math.random() * 800,
+  y2: Math.random() * 800,
+  cx1: Math.random() * 800,
+  cy1: Math.random() * 800,
   radius: 5,
 });
 function App() {
@@ -27,8 +27,8 @@ function App() {
   });
 
   const [style, setStyle] = useState({
-    radius: 30,
-    circleCount: 10,
+    radius: 0,
+    circleCount: 0,
     circleColor: "#c3ccdb",
   });
 
@@ -82,55 +82,65 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">cosmos</h1>
-      <div className="controls">
-        <Slider
-          max={50}
-          label="Radius"
-          value={radius}
-          onValueChange={handleRadiusChange}
-        />
-        <Slider
-          max={50}
-          label="count"
-          value={circleCount}
-          onValueChange={handleChannelChange}
-        />
+      <div className="container">
+        <div className="controls">
+          <h1 className="title">cosmos</h1>
+          <Slider
+            max={33}
+            label="add circle"
+            value={circleCount}
+            onValueChange={handleChannelChange}
+            className="slider"
+          />
+          <Slider
+            max={100}
+            label="make circle biger"
+            value={radius}
+            onValueChange={handleRadiusChange}
+          />
 
-        <div className="lineInput">
           <Slider
             max={100}
             label="lineWidht"
             value={lineWidht}
             onValueChange={handleLineWidhtChange}
+            className="slider"
+          />
+
+          <Slider
+            max={50}
+            label="let the stars shine"
+            value={radiuss}
+            onValueChange={handelChangeEtoile}
+            className="slider"
+          />
+
+          <div className="amount_etoil">
+            <label htmlFor="">add and remove etoil</label>
+            <div className="buttons">
+              <button className="AddButton button" onClick={handleAddItem}>
+                +
+              </button>
+              <button
+                className="removeButton button"
+                onClick={handleRemoveItem}
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <CosmosContainer
+            numLines={numLines}
+            lineWidht={lineWidht}
+            circleCount={circleCount}
+            radius={radius}
+            circleColor={circleColor}
+            items={items}
+            gradient={gradient}
           />
         </div>
-        <Slider
-          max={50}
-          label="sterren radius"
-          value={radiuss}
-          onValueChange={handelChangeEtoile}
-        />
-
-        <input type="color" value={circleColor} onChange={handleColorChange} />
-
-        <button className="AddButton button" onClick={handleAddItem}>
-          +
-        </button>
-        <button className="removeButton" onClick={handleRemoveItem}>
-          -
-        </button>
-      </div>
-      <div className="svg-container">
-        <CosmosContainer
-          numLines={numLines}
-          lineWidht={lineWidht}
-          circleCount={circleCount}
-          radius={radius}
-          circleColor={circleColor}
-          items={items}
-          gradient={gradient}
-        />
       </div>
     </div>
   );
