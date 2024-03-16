@@ -87,21 +87,21 @@ function App() {
           <h1 className="title">cosmos</h1>
           <Slider
             max={33}
-            label="add circle"
+            label="Add circle"
             value={circleCount}
             onValueChange={handleChannelChange}
             className="slider"
           />
           <Slider
             max={100}
-            label="make circle biger"
+            label="Aake circle biger"
             value={radius}
             onValueChange={handleRadiusChange}
           />
 
           <Slider
             max={100}
-            label="lineWidht"
+            label="Line widht"
             value={lineWidht}
             onValueChange={handleLineWidhtChange}
             className="slider"
@@ -109,14 +109,14 @@ function App() {
 
           <Slider
             max={50}
-            label="let the stars shine"
+            label="Aet the etoils shine"
             value={radiuss}
             onValueChange={handelChangeEtoile}
             className="slider"
           />
 
           <div className="amount_etoil">
-            <label htmlFor="">add and remove etoil</label>
+            <label htmlFor="">Add or remove etoils</label>
             <div className="buttons">
               <button className="AddButton button" onClick={handleAddItem}>
                 +
