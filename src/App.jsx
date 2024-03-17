@@ -94,7 +94,7 @@ function App() {
           />
           <Slider
             max={100}
-            label="Aake circle biger"
+            label="Make circle biger"
             value={radius}
             onValueChange={handleRadiusChange}
           />
@@ -109,7 +109,7 @@ function App() {
 
           <Slider
             max={50}
-            label="Aet the etoils shine"
+            label="Let the etoils shine"
             value={radiuss}
             onValueChange={handelChangeEtoile}
             className="slider"
