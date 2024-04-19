@@ -1,8 +1,9 @@
 // App.js
-import "./App.css";
+import "../App.css";
 import React, { useState } from "react";
-import Slider from "./components/Slider";
-import CosmosContainer from "./components/CosmosContainer";
+import Slider from "../components/Slider";
+import CosmosContainer from "../components/CosmosContainer";
+import { Outlet } from "react-router-dom";
 
 const generateItem = () => ({
   x1: Math.random() * 800,
@@ -13,7 +14,7 @@ const generateItem = () => ({
   cy1: Math.random() * 800,
   radius: 5,
 });
-function App() {
+function Root() {
   const gradient = (
     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stopColor="#ffffff" stopOpacity="0.1" />
@@ -75,6 +76,41 @@ function App() {
 
   const handleColorChange = (e) => {
     setStyle({ ...style, circleColor: e.target.value });
+  };
+
+  const handleSave = async () => {
+    const data = {
+      titel: "Cosmos",
+      description: "A beautiful cosmos",
+      image: "https://images.unsplash.com/photo-1631521349298-2f1b2b3c1f3b",
+      style: {
+        radius: style.radius,
+        circleCount: style.circleCount,
+        circleColor: style.circleColor,
+      },
+      lineStyle: {
+        numLines: lineStle.numLines,
+        lineWidht: lineStle.lineWidht,
+      },
+      items: items,
+      radiuss: radiuss,
+    };
+
+    // const response = await fetch("http://localhost:1337/api/artworks", {
+
+    const response = await fetch(
+      `${import.meta.env.VITE_STRAPI_URL}/api/artworks`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
   };
 
   const { radius, circleCount, circleColor } = style;
@@ -142,7 +178,13 @@ function App() {
           />
         </div>
       </div>
+      <div>
+        <button onClick={handleSave}>save</button>
+      </div>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 }
-export default App;
+export default Root;
