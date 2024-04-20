@@ -18,7 +18,7 @@ const CosmosContainer = ({
       <svg viewBox="0 0 800 800">
         <Lins countLine={numLines} widthLine={lineWidht} />
         <Circles count={circleCount} radius={radius} color={circleColor} />
-        <Etoiles items={items} gradient={gradient} />
+        <Etoiles items={items} gradient={gradient} /> 
       </svg>
     </div>
   );

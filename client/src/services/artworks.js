@@ -1,7 +1,17 @@
+import qs from "qs"; // Dit importeert de qs library
 import { fetchApi, unwrapAtributes } from "./strapi";
 
 const getArtworks = async () => {
-  const artworks = await fetchApi({ endpoint: "artworks" });
+  const query = qs.stringify(
+    {
+      populate: "*", // Dit voegt '?populate=*' toe aan de URL
+    },
+    {
+      addQueryPrefix: true, // Dit voegt de '?' toe aan het begin van de string
+    }
+  );
+
+  const artworks = await fetchApi({ endpoint: `artworks${query}` });
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
