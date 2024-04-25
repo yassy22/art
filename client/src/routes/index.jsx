@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
-
 const loader = async () => {
   const artworks = await getArtworks();
   return { artworks };
@@ -23,7 +22,7 @@ const Index = () => {
               className="artwork-overview__artwork-link"
               to={`/artworks/${artwork.id}`}
             >
-              <h2>{artwork.attributes.title}</h2>
+              <h2>{artwork.title}</h2>
             </Link>
           </li>
         ))}

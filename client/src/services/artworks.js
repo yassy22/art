@@ -1,8 +1,6 @@
 import qs from "qs"; // Dit importeert de qs library
 import { fetchApi, unwrapAtributes } from "./strapi";
 
-
-
 const getArtworks = async () => {
   const artworks = await fetchApi({
     endpoint: "artworks",
@@ -15,7 +13,9 @@ const getArtworks = async () => {
 export async function getArtwork(id) {
   const artwork = await fetchApi({ endpoint: `artworks/${id}` });
   if (!artwork) return null;
-  return unwrapAtributes(artwork);
+  const tmp = unwrapAtributes(artwork);
+  tmp.item = JSON.parse(tmp.item);
+  return tmp;
 }
 
 const createArtworks = async (data) => {

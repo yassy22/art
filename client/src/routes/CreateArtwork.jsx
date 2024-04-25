@@ -1,20 +1,10 @@
 // App.js
 import "../App.css";
 import { Form, redirect } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import Slider from "../components/Slider";
 import CosmosContainer from "../components/CosmosContainer";
 import { createArtworks } from "../services/artworks";
-
-const generateItem = () => ({
-  x1: Math.random() * 800,
-  y1: Math.random() * 800,
-  x2: Math.random() * 800,
-  y2: Math.random() * 800,
-  cx1: Math.random() * 800,
-  cy1: Math.random() * 800,
-  radius: 5,
-});
 
 const action = async ({ request }) => {
   const formData = await request.formData();
@@ -25,38 +15,63 @@ const action = async ({ request }) => {
 };
 
 function CreateArtwork() {
-  const gradient = (
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.1" />
-      <stop offset="50%" stopColor="#ffff00" stopOpacity="0.5" />
-      <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
-    </linearGradient>
+  const [style, setStyle] = useState({
+    radiusCircle: 10,
+    radiusStars: 2,
+    circleCount: 0,
+    circleColor: "#c3ccdb",
+    numLines: 30,
+    lineWidht: 0.1,
+    x1: Math.random() * 800,
+    y1: Math.random() * 800,
+    x2: Math.random() * 800,
+    y2: Math.random() * 800,
+    cx1: Math.random() * 800,
+    cy1: Math.random() * 800,
+    id: crypto.getRandomValues(new Uint32Array(1))[0],
+  });
+
+  const generateItem = () => {
+    const newItem = {
+      ...style,
+      id: crypto.getRandomValues(new Uint32Array(1))[0],
+      x1: Math.random() * 800,
+      y1: Math.random() * 800,
+      x2: Math.random() * 800,
+      y2: Math.random() * 800,
+      cx1: Math.random() * 800,
+      cy1: Math.random() * 800,
+    };
+
+    // console.log("generateItem:", newItem);
+    return newItem;
+  };
+
+  const [items, setItems] = useState(
+    new Array(1).fill().map(() => generateItem())
   );
+  console.log("items", items);
+
+  // const gradient = (
+  //   <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+  //     <stop offset="0%" stopColor="#ffffff" stopOpacity="0.1" />
+  //     <stop offset="50%" stopColor="#ffff00" stopOpacity="0.5" />
+  //     <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
+  //   </linearGradient>
+  // );
 
   const [title, setTitle] = useState("");
   const [newItemJson, setNewItemJson] = useState("");
 
-  const [lineStle, setLineStyle] = useState({
-    numLines: 30,
-    lineWidht: 0.1,
-  });
-
-  const [style, setStyle] = useState({
-    radius: 0,
-    circleCount: 0,
-    circleColor: "#c3ccdb",
-  });
-
   const defaultList = new Array(4).fill().map(() => generateItem());
-  const [radiuss, setRadius] = useState(5);
-  const [items, setItems] = useState(defaultList);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
-    // Update de state met de nieuwe waarde
   };
-  const handleRadiusChange = (radius) => {
-    setStyle({ ...style, radius });
+
+  const handleRadiusChange = (radiusCircle) => {
+    setStyle({ ...style, radiusCircle });
+    console.log("radiusCircle", radiusCircle);
   };
 
   const handleChannelChange = (circleCount) => {
@@ -64,13 +79,11 @@ function CreateArtwork() {
   };
 
   const handleLineWidhtChange = (lineWidht) => {
-    setLineStyle({ ...lineStle, lineWidht });
+    setStyle({ ...style, lineWidht });
   };
 
-  const handelChangeEtoile = (value) => {
-    setRadius(value);
-    const updatedItems = items.map((item) => ({ ...item, radius: value }));
-    setItems(updatedItems);
+  const handelChangeEtoile = (radiusStars) => {
+    setStyle({ ...style, radiusStars });
   };
 
   const handleAddItem = (e) => {
@@ -79,6 +92,7 @@ function CreateArtwork() {
     const newItem = generateItem();
     setItems([...items, newItem]);
     setNewItemJson(JSON.stringify(newItem));
+    console.log("newItemJson", newItemJson);
   };
 
   const handleRemoveItem = (e) => {
@@ -90,13 +104,17 @@ function CreateArtwork() {
   };
 
   console.log("newItemJson", newItemJson);
-  const handleColorChange = (e) => {
-    setStyle({ ...style, circleColor: e.target.value });
-  };
 
-  const { radius, circleCount, circleColor } = style;
-  const { numLines, lineWidht } = lineStle;
+  const {
+    radiusCircle,
+    radiusStars,
+    circleCount,
+    circleColor,
+    numLines,
+    lineWidht,
+  } = style;
 
+  console.log("items", radiusStars);
   return (
     <div className="App">
       <div className="container">
@@ -109,13 +127,12 @@ function CreateArtwork() {
               value={title}
               onChange={handleTitleChange}
             />
-            <input type="hidden" name="circleCount" value={circleCount} />
-            <input type="hidden" name="radius" value={radius} />
-            {/* <input type="hidden" name="circleColor" value={circleColor} /> */}
-            <input type="hidden" name="numLines" value={numLines} />
-            <input type="hidden" name="lineWidht" value={lineWidht} />
-            <input type="hidden" name="radiuss" value={radiuss} />
-            <input type="hidden" name="item" value={newItemJson} />
+
+            <input
+              type="hidden"
+              name="item"
+              value={JSON.stringify(defaultList)}
+            />
 
             <div>
               <Slider
@@ -129,7 +146,7 @@ function CreateArtwork() {
               <Slider
                 max={100}
                 label="Make circle biger"
-                value={radius}
+                value={radiusCircle}
                 onValueChange={handleRadiusChange}
               />
 
@@ -144,7 +161,7 @@ function CreateArtwork() {
               <Slider
                 max={50}
                 label="Let the etoils shine"
-                value={radiuss}
+                value={radiusStars}
                 onValueChange={handelChangeEtoile}
                 className="slider"
               />
@@ -178,10 +195,10 @@ function CreateArtwork() {
             numLines={numLines} // lijnen
             lineWidht={lineWidht} // lijnDikte
             circleCount={circleCount} // cirkels
-            radius={radius} //raduis
+            radiusCircle={radiusCircle} //raduis
             circleColor={circleColor} //kleur
+            radiusStars={radiusStars} // cirkel straal
             items={items} // items
-            gradient={gradient}
           />
         </div>
       </div>

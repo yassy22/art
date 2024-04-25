@@ -1,7 +1,6 @@
 // Circles.js
-import React from "react";
 
-const Lins = ({ countLine, widthLine }) => {
+const Lins = ({ countLine, lineWidht }) => {
   const lines = [];
   const radius = 40;
 
@@ -25,7 +24,7 @@ const Lins = ({ countLine, widthLine }) => {
         x2={x2}
         y2={y2}
         stroke="#CACBD1"
-        strokeWidth={widthLine}
+        strokeWidth={lineWidht}
       />
     );
   }

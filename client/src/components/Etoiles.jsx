@@ -1,14 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+// import React from "react";
+// import PropTypes from "prop-types";
 
-const Etoile = ({ items, gradient }) => {
-  console.log(items);
-
-
-  if (!Array.isArray(items)) {
-    console.error("Items is niet gedefinieerd of is geen array.");
-    return null; 
-  }
+const Etoile = ({ items, gradient, radiusStars }) => {
+  // console.log(items);
 
   const etoils = items.map((item, index) => (
     <g key={`line${index}`}>
@@ -26,8 +20,8 @@ const Etoile = ({ items, gradient }) => {
         key={`ellipse2`}
         cx={item.cx1}
         cy={item.cy1}
-        r={item.radius}
-        fill={`url(#gradient)`}
+        r={radiusStars}
+        fill="yellow"
       />
     </g>
   ));

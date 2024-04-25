@@ -374,12 +374,13 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    radius: Attribute.Decimal;
-    numLines: Attribute.Integer;
-    circleCount: Attribute.Decimal;
-    lineWidht: Attribute.Decimal;
     item: Attribute.JSON;
+    users_permissions_user: Attribute.Relation<
+      'api::artwork.artwork',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -806,6 +807,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    artworks: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::artwork.artwork'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

@@ -12,23 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "radius": {
-      "type": "decimal"
-    },
-    "numLines": {
-      "type": "integer"
-    },
-    "circleCount": {
-      "type": "decimal"
-    },
-    "lineWidht": {
-      "type": "decimal"
-    },
     "item": {
       "type": "json"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "artworks"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }
