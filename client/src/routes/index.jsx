@@ -1,11 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import { getArtworks } from "../services/artworks";
-import ArtworkCard from "../components/cards/ArtworkCard";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
-// import styles from "./index.module.css";
 
 const loader = async () => {
   const artworks = await getArtworks();
@@ -14,27 +12,35 @@ const loader = async () => {
 
 const Index = () => {
   const { artworks } = useLoaderData();
+
+  console.log(artworks);
   return (
-    <ul>
-      {artworks.map((artwork) => (
-        <li key={artwork.id}>
-          <Link to={`/artwork/${artwork.id}`}>
-            <h3>{artwork.titel}</h3>
-            <ArtworkCard artwork={artwork} />
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="artwork-overview__artwork-link" key={artworks.id}>
+      <ul>
+        {artworks.map((artwork) => (
+          <li key={artwork.id}>
+            <Link
+              className="artwork-overview__artwork-link"
+              to={`/artworks/${artwork.id}`}
+            >
+              <h2>{artwork.attributes.title}</h2>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 Index.loader = loader;
-ArtworkCard.loader = loader;
-ArtworkCard.propTypes = {
-  artwork: PropTypes.object,
+
+Index.propTypes = {
+  artworks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ),
 };
 
-// Index.propTypes = {
-//   artworks: PropTypes.array.isRequired,
-// };
-
 export default Index;
+/// je blijft in een document dus is beter dat link gebruikt dan a href

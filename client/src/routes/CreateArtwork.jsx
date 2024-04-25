@@ -33,6 +33,9 @@ function CreateArtwork() {
     </linearGradient>
   );
 
+  const [title, setTitle] = useState("");
+  const [newItemJson, setNewItemJson] = useState("");
+
   const [lineStle, setLineStyle] = useState({
     numLines: 30,
     lineWidht: 0.1,
@@ -48,6 +51,10 @@ function CreateArtwork() {
   const [radiuss, setRadius] = useState(5);
   const [items, setItems] = useState(defaultList);
 
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+    // Update de state met de nieuwe waarde
+  };
   const handleRadiusChange = (radius) => {
     setStyle({ ...style, radius });
   };
@@ -67,56 +74,25 @@ function CreateArtwork() {
   };
 
   const handleAddItem = (e) => {
+    e.preventDefault();
+
     const newItem = generateItem();
     setItems([...items, newItem]);
-    e.preventDefault();
+    setNewItemJson(JSON.stringify(newItem));
   };
 
   const handleRemoveItem = (e) => {
-    const tmpItems = [...items];
-    tmpItems.pop();
-    setItems(tmpItems);
+    const newItem = items.slice(0, -1);
+    setItems(newItem);
     e.preventDefault();
+
+    return newItem;
   };
 
+  console.log("newItemJson", newItemJson);
   const handleColorChange = (e) => {
     setStyle({ ...style, circleColor: e.target.value });
   };
-
-  // const handleSave = async () => {
-  //   const data = {
-  //     titel: "Cosmos",
-  //     description: "A beautiful cosmos",
-  //     image: "https://images.unsplash.com/photo-1631521349298-2f1b2b3c1f3b",
-  //     style: {
-  //       radius: style.radius,
-  //       circleCount: style.circleCount,
-  //       circleColor: style.circleColor,
-  //     },
-  //     lineStyle: {
-  //       numLines: lineStle.numLines,
-  //       lineWidht: lineStle.lineWidht,
-  //     },
-  //     items: items,
-  //     radiuss: radiuss,
-  //   };
-
-  //   // const response = await fetch("http://localhost:1337/api/artworks", {
-
-  //   const response = await fetch(
-  //     `${import.meta.env.VITE_STRAPI_URL}/api/artworks`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ data }),
-  //     }
-  //   );
-
-  //   const result = await response.json();
-  //   console.log(result);
-  // };
 
   const { radius, circleCount, circleColor } = style;
   const { numLines, lineWidht } = lineStle;
@@ -127,37 +103,52 @@ function CreateArtwork() {
         <div className="controls">
           <h1 className="title">cosmos</h1>
           <Form method="POST">
-            <Slider
-              max={33}
-              label="Add circle"
-              value={circleCount}
-              onValueChange={handleChannelChange}
-              className="slider"
+            <input
+              name="title"
+              placeholder="Geef een naam"
+              value={title}
+              onChange={handleTitleChange}
             />
+            <input type="hidden" name="circleCount" value={circleCount} />
+            <input type="hidden" name="radius" value={radius} />
+            {/* <input type="hidden" name="circleColor" value={circleColor} /> */}
+            <input type="hidden" name="numLines" value={numLines} />
+            <input type="hidden" name="lineWidht" value={lineWidht} />
+            <input type="hidden" name="radiuss" value={radiuss} />
+            <input type="hidden" name="item" value={newItemJson} />
 
-            <Slider
-              max={100}
-              label="Make circle biger"
-              value={radius}
-              onValueChange={handleRadiusChange}
-            />
+            <div>
+              <Slider
+                max={33}
+                label="Add circle"
+                value={circleCount}
+                onValueChange={handleChannelChange}
+                className="slider"
+              />
 
-            <Slider
-              max={100}
-              label="Line widht"
-              value={lineWidht}
-              onValueChange={handleLineWidhtChange}
-              className="slider"
-            />
+              <Slider
+                max={100}
+                label="Make circle biger"
+                value={radius}
+                onValueChange={handleRadiusChange}
+              />
 
-            <Slider
-              max={50}
-              label="Let the etoils shine"
-              value={radiuss}
-              onValueChange={handelChangeEtoile}
-              className="slider"
-            />
+              <Slider
+                max={100}
+                label="Line widht"
+                value={lineWidht}
+                onValueChange={handleLineWidhtChange}
+                className="slider"
+              />
 
+              <Slider
+                max={50}
+                label="Let the etoils shine"
+                value={radiuss}
+                onValueChange={handelChangeEtoile}
+                className="slider"
+              />
+            </div>
             <div className="amount_etoil">
               <label htmlFor="">Add or remove etoils</label>
               <div className="buttons">
@@ -184,18 +175,16 @@ function CreateArtwork() {
         </div>
         <div>
           <CosmosContainer
-            numLines={numLines}
-            lineWidht={lineWidht}
-            circleCount={circleCount}
-            radius={radius}
-            circleColor={circleColor}
-            items={items}
+            numLines={numLines} // lijnen
+            lineWidht={lineWidht} // lijnDikte
+            circleCount={circleCount} // cirkels
+            radius={radius} //raduis
+            circleColor={circleColor} //kleur
+            items={items} // items
             gradient={gradient}
           />
         </div>
       </div>
-
-      <div>{/* <button onClick={handleSave}>save</button> */}</div>
     </div>
   );
 }

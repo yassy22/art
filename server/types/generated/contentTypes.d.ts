@@ -374,9 +374,12 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    titel: Attribute.String;
-    description: Attribute.String;
-    style: Attribute.Component<'configuration.style'>;
+    title: Attribute.String;
+    radius: Attribute.Decimal;
+    numLines: Attribute.Integer;
+    circleCount: Attribute.Decimal;
+    lineWidht: Attribute.Decimal;
+    item: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

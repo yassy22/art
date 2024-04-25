@@ -23,12 +23,12 @@ const CosmosContainer = ({
     </div>
   );
 };
-CosmosContainer.propTypes = {
-  numLines: PropTypes.number.isRequired,
-  lineWidht: PropTypes.number.isRequired,
-  circleCount: PropTypes.number.isRequired,
-  radius: PropTypes.number.isRequired,
-  circleColor: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
-};
+// CosmosContainer.propTypes = {
+//   numLines: PropTypes.number.isRequired,
+//   lineWidht: PropTypes.number.isRequired,
+//   circleCount: PropTypes.number.isRequired,
+//   radius: PropTypes.number.isRequired,
+//   circleColor: PropTypes.string.isRequired,
+//   items: PropTypes.array.isRequired,
+// };
 export default CosmosContainer;

@@ -12,16 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "titel": {
+    "title": {
       "type": "string"
     },
-    "description": {
-      "type": "string"
+    "radius": {
+      "type": "decimal"
     },
-    "style": {
-      "type": "component",
-      "repeatable": false,
-      "component": "configuration.style"
+    "numLines": {
+      "type": "integer"
+    },
+    "circleCount": {
+      "type": "decimal"
+    },
+    "lineWidht": {
+      "type": "decimal"
+    },
+    "item": {
+      "type": "json"
     }
   }
 }

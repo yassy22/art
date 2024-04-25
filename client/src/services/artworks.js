@@ -1,20 +1,22 @@
 import qs from "qs"; // Dit importeert de qs library
 import { fetchApi, unwrapAtributes } from "./strapi";
 
-const getArtworks = async () => {
-  const query = qs.stringify(
-    {
-      populate: "*", // Dit voegt '?populate=*' toe aan de URL
-    },
-    {
-      addQueryPrefix: true, // Dit voegt de '?' toe aan het begin van de string
-    }
-  );
 
-  const artworks = await fetchApi({ endpoint: `artworks${query}` });
+
+const getArtworks = async () => {
+  const artworks = await fetchApi({
+    endpoint: "artworks",
+    query: { populate: "*" },
+  });
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
+
+export async function getArtwork(id) {
+  const artwork = await fetchApi({ endpoint: `artworks/${id}` });
+  if (!artwork) return null;
+  return unwrapAtributes(artwork);
+}
 
 const createArtworks = async (data) => {
   const artwork = await fetchApi(

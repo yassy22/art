@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import ArtworkDetails from "./routes/ArtworkDetails.jsx";
-import ArtworkCard from "./components/cards/ArtworkCard";
+import Artwork from "./routes/artwork";
 
 import CreateArtwork from "./routes/CreateArtwork";
 import ErrorPage from "./error-page.jsx";
@@ -25,9 +25,9 @@ const router = createBrowserRouter([
         action: CreateArtwork.action,
       },
       {
-        path: "/artwork/:id",
-        element: <ArtworkCard />,
-        loader: ArtworkCard.loader,
+        path: "/artworks/:id",
+        element: <Artwork />,
+        loader: Artwork.loader,
       },
     ],
   },
