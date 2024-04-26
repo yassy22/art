@@ -374,13 +374,14 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    item: Attribute.JSON;
+    items: Attribute.JSON;
     users_permissions_user: Attribute.Relation<
       'api::artwork.artwork',
       'manyToOne',
       'plugin::users-permissions.user'
     >;
     title: Attribute.String;
+    style: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

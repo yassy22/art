@@ -11,23 +11,15 @@ const loader = async ({ params }) => {
 
 const Artwork = () => {
   const { artwork } = useLoaderData();
-  const { item } = artwork;
-  console.log("Artwork", item[0].radiusCircle);
-  console.log("Artwork", item[0].numLines);
-  console.log("Artwork", item[0].lineWidht);
-  
+  const { title, items, style } = artwork;
+  console.log("artwork", style);
+  console.log("artwork", items);
+  console.log("artwork", title);
 
   return (
     <div>
-      <CosmosContainer
-        items={item}
-        radiusCircle={item[0].radiusCircle}
-        numLines={item[0].numLines}
-        lineWidht={item[0].lineWidht}
-        circleCount={item[0].circleCount}
-        circleColor={item[0].circleColor}
-        radiusStars={item[0].radiusStars}
-      />
+      <h1>{title}</h1>
+      <CosmosContainer items={items}  {...style} />
       <p>Creator</p>
     </div>
   );

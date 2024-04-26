@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import ArtworkDetails from "./routes/ArtworkDetails.jsx";
+import Login from "./routes/auth/login.jsx";
+
 import Artwork from "./routes/artwork";
 
 import CreateArtwork from "./routes/CreateArtwork";
@@ -17,17 +18,26 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    loader: Root.loader,
+
     children: [
       { index: true, element: <Index />, loader: Index.loader },
       {
         path: "/artwork/create",
         element: <CreateArtwork />,
         action: CreateArtwork.action,
+        loader: CreateArtwork.loader,
       },
       {
         path: "/artworks/:id",
         element: <Artwork />,
         loader: Artwork.loader,
+      },
+      {
+        path: "/auth/login",
+        element: <Login />,
+        action: Login.action,
+        loader: Login.loader,
       },
     ],
   },

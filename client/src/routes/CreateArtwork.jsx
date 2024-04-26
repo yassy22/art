@@ -5,6 +5,17 @@ import { useState } from "react";
 import Slider from "../components/Slider";
 import CosmosContainer from "../components/CosmosContainer";
 import { createArtworks } from "../services/artworks";
+import { getAuthData } from "../services/auth";
+
+const loader = async ({ request }) => {
+  const { user } = getAuthData();
+  if (!user) {
+    let params = new URLSearchParams();
+    params.set("from", new URL(request.url).pathname);
+    return redirect("/auth/login?" + params.toString());
+  }
+  return null;
+};
 
 const action = async ({ request }) => {
   const formData = await request.formData();
@@ -22,6 +33,12 @@ function CreateArtwork() {
     circleColor: "#c3ccdb",
     numLines: 30,
     lineWidht: 0.1,
+    id: crypto.getRandomValues(new Uint32Array(1))[0],
+  });
+
+  const [items, setItems] = useState([]);
+
+  const generateItem = () => ({
     x1: Math.random() * 800,
     y1: Math.random() * 800,
     x2: Math.random() * 800,
@@ -30,27 +47,6 @@ function CreateArtwork() {
     cy1: Math.random() * 800,
     id: crypto.getRandomValues(new Uint32Array(1))[0],
   });
-
-  const generateItem = () => {
-    const newItem = {
-      ...style,
-      id: crypto.getRandomValues(new Uint32Array(1))[0],
-      x1: Math.random() * 800,
-      y1: Math.random() * 800,
-      x2: Math.random() * 800,
-      y2: Math.random() * 800,
-      cx1: Math.random() * 800,
-      cy1: Math.random() * 800,
-    };
-
-    // console.log("generateItem:", newItem);
-    return newItem;
-  };
-
-  const [items, setItems] = useState(
-    new Array(1).fill().map(() => generateItem())
-  );
-  console.log("items", items);
 
   // const gradient = (
   //   <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -61,9 +57,6 @@ function CreateArtwork() {
   // );
 
   const [title, setTitle] = useState("");
-  const [newItemJson, setNewItemJson] = useState("");
-
-  const defaultList = new Array(4).fill().map(() => generateItem());
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -88,22 +81,13 @@ function CreateArtwork() {
 
   const handleAddItem = (e) => {
     e.preventDefault();
-
-    const newItem = generateItem();
-    setItems([...items, newItem]);
-    setNewItemJson(JSON.stringify(newItem));
-    console.log("newItemJson", newItemJson);
+    setItems([...items, generateItem()]);
   };
 
   const handleRemoveItem = (e) => {
-    const newItem = items.slice(0, -1);
-    setItems(newItem);
     e.preventDefault();
-
-    return newItem;
+    setItems(items.slice(0, -1));
   };
-
-  console.log("newItemJson", newItemJson);
 
   const {
     radiusCircle,
@@ -114,7 +98,7 @@ function CreateArtwork() {
     lineWidht,
   } = style;
 
-  console.log("items", radiusStars);
+  console.log("items", style);
   return (
     <div className="App">
       <div className="container">
@@ -128,11 +112,8 @@ function CreateArtwork() {
               onChange={handleTitleChange}
             />
 
-            <input
-              type="hidden"
-              name="item"
-              value={JSON.stringify(defaultList)}
-            />
+            <input type="hidden" name="items" value={JSON.stringify(items)} />
+            <input type="hidden" name="style" value={JSON.stringify(style)} />
 
             <div>
               <Slider
@@ -206,5 +187,6 @@ function CreateArtwork() {
   );
 }
 CreateArtwork.action = action;
+CreateArtwork.loader = loader;
 
 export default CreateArtwork;

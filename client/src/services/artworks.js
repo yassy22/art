@@ -1,11 +1,9 @@
-import qs from "qs"; // Dit importeert de qs library
+// import qs from "qs"; // Dit importeert de qs library
 import { fetchApi, unwrapAtributes } from "./strapi";
+import { getToken } from "./auth";
 
 const getArtworks = async () => {
-  const artworks = await fetchApi({
-    endpoint: "artworks",
-    query: { populate: "*" },
-  });
+  const artworks = await fetchApi({ endpoint: "artworks" });
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
@@ -14,7 +12,9 @@ export async function getArtwork(id) {
   const artwork = await fetchApi({ endpoint: `artworks/${id}` });
   if (!artwork) return null;
   const tmp = unwrapAtributes(artwork);
-  tmp.item = JSON.parse(tmp.item);
+
+  tmp.items = JSON.parse(tmp.items);
+  tmp.style = JSON.parse(tmp.style);
   return tmp;
 }
 
@@ -28,7 +28,7 @@ const createArtworks = async (data) => {
       body: JSON.stringify({ data }),
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${getToken()}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }
   );
