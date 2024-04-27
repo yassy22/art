@@ -48,14 +48,14 @@ const action = async ({ request }) => {
 };
 
 const Login = () => {
-  let location = useLocation(); // useLocation hook wat is dit?   // location is a hook that returns the current location object. You can think of it like a useState that returns a new location whenever the URL changes.
+  let location = useLocation(); 
   let params = new URLSearchParams(location.search);
   let from = params.get("from") || "/"; //
 
-  let navigation = useNavigation(); // useNavigation is a hook that returns the current navigation object. This object contains information about the current navigation state, such as the current URL, the current form data, and the current action data.
+  let navigation = useNavigation();
   let isLoggingIn = navigation.formData?.get("email") != null;
 
-  let actionData = useActionData(); // useActionData is a hook that returns the data from the last action that was executed. This is useful for displaying error messages or loading states after a form submission.
+  let actionData = useActionData(); 
 
   return (
     <section>

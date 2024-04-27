@@ -29,9 +29,9 @@ body {
 }
 
 .svg-container {
-  background-color: #010020;
-  height: 800px;
-  width: 800px;
+  width: 100%; /* Volledige breedte van de container */
+  width: 600px; /* Maximale breedte */
+  height: 600px; /* Maximale hoogte */
   border: 0.1px solid white;
 }
 

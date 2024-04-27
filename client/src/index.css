@@ -1,1 +1,45 @@
 
+
+.artwork-list{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+/* Stijlen voor elk kunstwerk item */
+.artwork-list-item {
+ 
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.artwork-list-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Stijlen voor de links */
+.artwork-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.artwork-link:hover {
+  text-decoration: underline;
+}
+
+/* Stijlen voor de titels binnen de links */
+.artwork-link h2 {
+  font-size: 20px; /* Aangepast voor consistentie in flex items */
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+/* Responsive design voor kleinere schermen */
+@media (max-width: 768px) {
+  .artwork-list-item {
+    flex: 1 1 100%; /* Volle breedte op kleine schermen */
+  }
+}

@@ -10,7 +10,6 @@ const loader = async () => {
 
 const Index = () => {
   const { artworks } = useLoaderData();
-
   return (
     <div key={artworks.id} className="artwork-list-container">
       <ul className="artwork-list">
