@@ -3,13 +3,19 @@ import { fetchApi, unwrapAtributes } from "./strapi";
 import { getToken } from "./auth";
 
 const getArtworks = async () => {
-  const artworks = await fetchApi({ endpoint: "artworks" });
+  const artworks = await fetchApi({
+    endpoint: "artworks",
+    wrappedByKey: "data",
+  });
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
 
 export async function getArtwork(id) {
-  const artwork = await fetchApi({ endpoint: `artworks/${id}` });
+  const artwork = await fetchApi({
+    endpoint: `artworks/${id}`,
+    wrappedByKey: "data",
+  });
   if (!artwork) return null;
   const tmp = unwrapAtributes(artwork);
 
@@ -35,4 +41,13 @@ const createArtworks = async (data) => {
   return unwrapAtributes(artwork);
 };
 
-export { getArtworks, createArtworks };
+const getCheeseById = async (id) => {
+  const artwork = await fetchApi({
+    endpoint: `artworks/${id}`,
+    query: { populate: ["owner"] },
+    wrappedByKey: undefined,
+  });
+  return unwrapAtributes(artwork);
+};
+
+export { getArtworks, createArtworks, getCheeseById };

@@ -1,4 +1,4 @@
-const AUTH_DATA = "auth-data-kaasbaas"; // AUTH_DATA is a constant that stores the key used to save the authentication data in the local storage. This key is used to retrieve the authentication data when the user logs in or registers.
+const AUTH_DATA = "auth-data-artwork"; // AUTH_DATA is a constant that stores the key used to save the authentication data in the local storage. This key is used to retrieve the authentication data when the user logs in or registers.
 // van waar komt de naam AUTH_DATA? // AUTH_DATA is a common name used to store authentication data in the local storage. It is a convention to use this name to store the authentication data in the local storage. You can use any name you want, but it is recommended to use a name that is easy to remember and understand.
 export const authenticate = async (username, password) => {
   let response;
@@ -70,3 +70,20 @@ export const getToken = () => {
   const authData = getAuthData();
   return authData.jwt;
 };
+
+
+export const getMe = async () => {
+  const result = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/api/users/me?populate=*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  ).then((res) => res.json());
+
+  return result;
+};
+

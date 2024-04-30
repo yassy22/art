@@ -48,25 +48,24 @@ const action = async ({ request }) => {
 };
 
 const Login = () => {
-  let location = useLocation(); 
+  let location = useLocation();
   let params = new URLSearchParams(location.search);
   let from = params.get("from") || "/"; //
 
   let navigation = useNavigation();
   let isLoggingIn = navigation.formData?.get("email") != null;
 
-  let actionData = useActionData(); 
+  let actionData = useActionData();
 
   return (
     <section>
-      <hgroup >
-        <h2>Sign in</h2>
-        {from != "/" ? (
-          <p>You must log in to view the page at {from}</p>
-        ) : (
-          <p>Get access to all the features</p>
-        )}
-      </hgroup>
+      <h2>Sign in</h2>
+      {from != "/" ? (
+        <p>You must log in to view the page at {from}</p>
+      ) : (
+        <p>Get access to all the features</p>
+      )}
+
       <Form method="post">
         <div>
           <input type="hidden" name="redirectTo" value={from} />
@@ -98,9 +97,7 @@ const Login = () => {
           <button type="submit" disabled={isLoggingIn}>
             {isLoggingIn ? "Logging in..." : "Login"}
           </button>
-          <Link to="/auth/register">
-            ...or Sign up!
-          </Link>
+          <Link to="/auth/register">...or Sign up!</Link>
         </div>
       </Form>
     </section>

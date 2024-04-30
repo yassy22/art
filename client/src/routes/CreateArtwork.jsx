@@ -98,7 +98,7 @@ function CreateArtwork() {
     lineWidht,
   } = style;
 
-  console.log("items", style);
+  // console.log("items", style);
   return (
     <div className="App">
       <div className="container">

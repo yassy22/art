@@ -1,6 +1,6 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useRouteLoaderData } from "react-router-dom";
 import { getArtworks } from "../services/artworks";
-import { Link } from "react-router-dom";
+
 import CosmosContainer from "../components/CosmosContainer";
 
 const loader = async () => {

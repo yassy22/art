@@ -374,14 +374,14 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
+    title: Attribute.String;
     items: Attribute.JSON;
-    users_permissions_user: Attribute.Relation<
+    style: Attribute.JSON;
+    user: Attribute.Relation<
       'api::artwork.artwork',
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    title: Attribute.String;
-    style: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -780,7 +780,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &

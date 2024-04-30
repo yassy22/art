@@ -13,7 +13,6 @@ const Root = () => {
       <AuthStatus />
 
       <main>
-        <h1>hello root</h1>
         <Outlet />
       </main>
     </>

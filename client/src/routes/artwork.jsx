@@ -18,7 +18,7 @@ const Artwork = () => {
 
   return (
     <div>
-      <h1>{title}</h1>
+      <p className="artwork_name">{title}</p>
       <CosmosContainer items={items}  {...style} />
       <p>Creator</p>
     </div>

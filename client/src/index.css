@@ -5,6 +5,10 @@
     flex-wrap: wrap;
     
 }
+/* a:has(article){
+  color: inherit;
+} */
+
 
 /* Stijlen voor elk kunstwerk item */
 .artwork-list-item {
@@ -43,3 +47,4 @@
     flex: 1 1 100%; /* Volle breedte op kleine schermen */
   }
 }
+
