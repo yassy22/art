@@ -371,7 +371,7 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     title: Attribute.String;
@@ -384,7 +384,6 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::artwork.artwork',
       'oneToOne',

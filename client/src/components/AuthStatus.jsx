@@ -3,7 +3,7 @@
 import { NavLink, redirect, Form, useLoaderData } from "react-router-dom";
 import * as jose from "jose";
 
-export async function loader() {
+const loader = () => {
   //doesnt work correctly, this component doesnt rerender every click so this doesnt get checked every time it needs to be
   const user = JSON.parse(localStorage.getItem("user"));
   const jwt = localStorage.getItem("jwt");
@@ -27,8 +27,6 @@ export async function loader() {
 }
 
 const AuthStatus = () => {
-  // let { user } = useRouteLoaderData("root"); // useRouteLoaderData is a hook that returns the data that was loaded by the route loader. This is useful for accessing the data that was loaded by the route loader in the component.
-
   const data = useLoaderData();
   let user;
   let jwt;
@@ -54,9 +52,7 @@ const AuthStatus = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="navlink" to="/my-artworks">
-            MY ARTWORKS
-          </NavLink>
+          <NavLink className="navlink" to={`/user/${user.id}`}>my</NavLink>
         </li>
         <li>
           <NavLink className="navlink" to="/liked">
@@ -64,7 +60,7 @@ const AuthStatus = () => {
           </NavLink>
         </li>
         <li>
-          <Form method="post" action="logout">
+          <Form method="post" action="/auth/logout">
             <button className="logout-button" type="submit">
               LOG OUT
             </button>
@@ -95,21 +91,8 @@ const AuthStatus = () => {
   }
 
   return <ul>{links}</ul>;
-
-  // return (
-  //   <div>
-  //     {user ? (
-  //       <>
-  //         <Link to="/artwork/create">Add Cheese</Link>
-  //         <Link to="/auth/profile">
-  //           <FaUser />
-  //         </Link>
-  //       </>
-  //     ) : (
-  //       <Link to="/auth/login">Sign in</Link>
-  //     )}
-  //   </div>
-  // );
 };
 
+
+AuthStatus.loader = loader;
 export default AuthStatus;

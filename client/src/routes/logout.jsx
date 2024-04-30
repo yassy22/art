@@ -1,10 +1,10 @@
 import { redirect } from "react-router-dom";
+import { logout as action } from "../services/auth";
 
-export async function action() {
-  localStorage.removeItem("user");
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("authData");
-
-  return redirect("/login");
+const Logout = () => {
+  return redirect("/");
 }
-export default action;
+
+Logout.action = action;
+
+export default Logout;

@@ -97,7 +97,7 @@ const Login = () => {
           <button type="submit" disabled={isLoggingIn}>
             {isLoggingIn ? "Logging in..." : "Login"}
           </button>
-          <Link to="/auth/register">...or Sign up!</Link>
+          <Link to="/register">...or Sign up!</Link>
         </div>
       </Form>
     </section>

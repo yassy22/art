@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useRouteLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { getArtworks } from "../services/artworks";
 
 import CosmosContainer from "../components/CosmosContainer";
@@ -25,6 +25,7 @@ const Index = () => {
           </li>
         ))}
       </ul>
+      
     </div>
   );
 };

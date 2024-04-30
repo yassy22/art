@@ -1,5 +1,5 @@
 import { getArtwork } from "../services/artworks";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData , Form } from "react-router-dom";
 import CosmosContainer from "../components/CosmosContainer";
 import PropTypes from "prop-types";
 
@@ -19,8 +19,20 @@ const Artwork = () => {
   return (
     <div>
       <p className="artwork_name">{title}</p>
-      <CosmosContainer items={items}  {...style} />
+      <CosmosContainer items={items} {...style} />
       <p>Creator</p>
+
+      <Form
+        method="post"
+        action="destroy"
+        onSubmit={(event) => {
+          if (!confirm("Please confirm you want to delete this record.")) {
+            event.preventDefault();
+          }
+        }}
+      >
+        <button type="submit">Delete</button>
+      </Form>
     </div>
   );
 };

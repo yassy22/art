@@ -87,3 +87,8 @@ export const getMe = async () => {
   return result;
 };
 
+
+
+export const logout = () => {
+  localStorage.removeItem(AUTH_DATA);
+}; // logout is a function that removes the authentication data from the local storage. This function is used to log out the user and remove the authentication data from the local storage.

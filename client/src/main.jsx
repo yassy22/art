@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider , redirect} from "react-router-dom";
 import Login from "./routes/auth/login.jsx";
-import { action as logOutAction } from './routes/logout';
-
 import Register from "./routes/register";
+import { logout } from "./services/auth";
+import { action as destroyAction } from "./routes/destroy";
 
 
 import Artwork from "./routes/artwork";
@@ -52,8 +52,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/logout",
-        action: logOutAction,
+        path: "/auth/logout",
+        action: () => {
+          logout();
+          return redirect("/");
+        },
+      },
+      {
+        path: "artworks/:id/destroy",
+        action: destroyAction,
+        errorElement: <div>Oops! There was an error.</div>,
       },
     ],
   },
@@ -62,7 +70,7 @@ const router = createBrowserRouter([
     path: "register",
     element: <Register />,
     errorElement: <ErrorPage />,
-    action: Register.action, 
+    action: Register.action,
   },
 ]);
 
