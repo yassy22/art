@@ -1,11 +1,14 @@
 /* App.css */
+html {
+    box-sizing: border-box;
+
+}
 .App {
   text-align: center;
 }
 
 body {
   background-color: #010020;
-  color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .title {
@@ -72,3 +75,8 @@ body {
   padding-top: 1rem;
 }
 
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

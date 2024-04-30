@@ -3,6 +3,8 @@
 import { NavLink, redirect, Form, useLoaderData } from "react-router-dom";
 import * as jose from "jose";
 
+import "./AuthStatus.css";
+
 const loader = () => {
   //doesnt work correctly, this component doesnt rerender every click so this doesnt get checked every time it needs to be
   const user = JSON.parse(localStorage.getItem("user"));
@@ -24,7 +26,7 @@ const loader = () => {
   } else {
     return null;
   }
-}
+};
 
 const AuthStatus = () => {
   const data = useLoaderData();
@@ -41,31 +43,37 @@ const AuthStatus = () => {
   if (loggedIn) {
     links = (
       <>
-        <li>
-          <NavLink className="navlink" to="/">
-            EXPLORE
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="navlink" to="/artwork/create">
-            Maak een nieuwe artwork
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="navlink" to={`/user/${user.id}`}>my</NavLink>
-        </li>
-        <li>
+        <div className="nav_link_wrapp">
+          <div className="all_links">
+            <li>
+              <NavLink className="navlink" to="/">
+                EXPLORE
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="navlink" to="/artwork/create">
+                NIEUW ARTWORK
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="navlink" to={`/user/${user.id}`}>
+                FAVORIET 
+              </NavLink>
+            </li>
+            {/* <li>
           <NavLink className="navlink" to="/liked">
             LIKED
           </NavLink>
-        </li>
-        <li>
-          <Form method="post" action="/auth/logout">
-            <button className="logout-button" type="submit">
-              LOG OUT
-            </button>
-          </Form>
-        </li>
+        </li> */}
+          </div>
+          <div>
+            <Form method="post" action="/auth/logout">
+              <button className="logout-button" type="submit">
+                LOG OUT
+              </button>
+            </Form>
+          </div>
+        </div>
       </>
     );
   } else {
@@ -90,9 +98,8 @@ const AuthStatus = () => {
     );
   }
 
-  return <ul>{links}</ul>;
+  return <ul className="nav_links">{links}</ul>;
 };
-
 
 AuthStatus.loader = loader;
 export default AuthStatus;

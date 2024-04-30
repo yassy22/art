@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import ErrorField from "../components/ErrorField";
 import { register } from "../services/auth";
+import "./register.css";
 
 const action = async ({ request }) => {
   const formData = await request.formData();
@@ -41,7 +42,6 @@ const action = async ({ request }) => {
   let redirectTo = formData.get("redirectTo") | null;
   return redirect(redirectTo || "/");
 };
-
 const Register = () => {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
@@ -53,15 +53,13 @@ const Register = () => {
   let actionData = useActionData();
 
   return (
-    <section>
-      
-        <h2>Sign up</h2>
-        <p>Get access to all the features</p>
-     
-      <Form method="post">
+    <section className="register-section">
+      <h2>Sign up</h2>
+      <p>Get access to all the features</p>
+      <Form method="post" className="register-form">
         <input type="hidden" name="redirectTo" value={from} />
         <div>
-          <label htmlFor="email">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -69,6 +67,7 @@ const Register = () => {
             placeholder="username"
             autoComplete="username"
             defaultValue="tester-0"
+            className="register-input"
           />
           <ErrorField data={actionData} field="username" />
         </div>
@@ -81,10 +80,11 @@ const Register = () => {
             placeholder="e-mail"
             autoComplete="email"
             defaultValue="tester@devine.be"
+            className="register-input"
           />
           <ErrorField data={actionData} field="email" />
         </div>
-        <div >
+        <div>
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -93,15 +93,16 @@ const Register = () => {
             placeholder="password"
             autoComplete="current-password"
             defaultValue="tester"
+            className="register-input"
           />
           <ErrorField data={actionData} field="password" />
         </div>
-        <div >
+        <div>
           <ErrorField data={actionData} field="general" />
           <button
             type="submit"
             disabled={isLoggingIn}
-            className={actionData && actionData.error}
+            className="register-button"
           >
             {isLoggingIn ? "Sending..." : "Sign up"}
           </button>
@@ -110,9 +111,6 @@ const Register = () => {
     </section>
   );
 };
-
-
-
 
 Register.action = action;
 

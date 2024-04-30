@@ -1,0 +1,40 @@
+.nav_link_wrapp{
+  display: flex;
+ justify-content: space-between;
+  padding: 10px;
+  text-align: center;
+}
+.all_links{
+  display: flex;
+}
+
+a:has(article) {
+  color: inherit;
+}
+
+/* styles.css */
+.navlink,
+.logout-button {
+  padding: 10px;
+  color: #555;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navlink.active,
+.logout-button:hover {
+  color: white;
+  font-weight: bold;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+

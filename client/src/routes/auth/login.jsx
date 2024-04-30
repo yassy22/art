@@ -1,12 +1,12 @@
+import "./Login.css";
 import {
   Form,
   Link,
-  redirect,
-  useActionData,
   useLocation,
   useNavigation,
+  useActionData,
+  redirect
 } from "react-router-dom";
-
 import { authenticate, getAuthData } from "../../services/auth";
 import ErrorField from "../../components/ErrorField";
 
@@ -35,7 +35,6 @@ const action = async ({ request }) => {
   }
 
   try {
-    // try catch block is used to handle errors in the code. If an error occurs in the try block, the catch block will catch the error and handle it.
     await authenticate(email, password);
   } catch (error) {
     return {
@@ -43,14 +42,14 @@ const action = async ({ request }) => {
     };
   }
 
-  let redirectTo = formData.get("redirectTo") | null; // formData is a FormData object that contains the data from the form submission. This object is useful for accessing the form data in the action function.
+  let redirectTo = formData.get("redirectTo") || null;
   return redirect(redirectTo || "/");
 };
 
 const Login = () => {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
-  let from = params.get("from") || "/"; //
+  let from = params.get("from") || "/";
 
   let navigation = useNavigation();
   let isLoggingIn = navigation.formData?.get("email") != null;
@@ -58,17 +57,16 @@ const Login = () => {
   let actionData = useActionData();
 
   return (
-    <section>
+    <section className="login-section">
       <h2>Sign in</h2>
-      {from != "/" ? (
+      {from !== "/" ? (
         <p>You must log in to view the page at {from}</p>
       ) : (
         <p>Get access to all the features</p>
       )}
-
-      <Form method="post">
+      <Form method="post" className="login-form">
+        <input type="hidden" name="redirectTo" value={from} />
         <div>
-          <input type="hidden" name="redirectTo" value={from} />
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -77,6 +75,7 @@ const Login = () => {
             placeholder="e-mail"
             autoComplete="email"
             defaultValue="tester@devine.be"
+            className="login-input"
           />
           <ErrorField data={actionData} field="email" />
         </div>
@@ -89,15 +88,18 @@ const Login = () => {
             placeholder="Password"
             autoComplete="current-password"
             defaultValue="tester"
+            className="login-input"
           />
           <ErrorField data={actionData} field="password" />
         </div>
         <div>
           <ErrorField data={actionData} field="general" />
-          <button type="submit" disabled={isLoggingIn}>
+          <button type="submit" className="login-button" disabled={isLoggingIn}>
             {isLoggingIn ? "Logging in..." : "Login"}
           </button>
-          <Link to="/register">...or Sign up!</Link>
+          <Link to="/register" className="login-link">
+            ...or Sign up!
+          </Link>
         </div>
       </Form>
     </section>
@@ -105,6 +107,6 @@ const Login = () => {
 };
 
 Login.action = action;
-Login.loader = loader; // eslint-disable-line
+Login.loader = loader;
 
 export default Login;
