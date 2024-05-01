@@ -57,7 +57,7 @@ const AuthStatus = () => {
             </li>
             <li>
               <NavLink className="navlink" to={`/user/${user.id}`}>
-                FAVORIET 
+                MY ARTWORK 
               </NavLink>
             </li>
             {/* <li>

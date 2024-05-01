@@ -1,6 +1,6 @@
 html {
   font-size: 16px;
-  color: lightblue;
+  color: white;
 }
 
 
@@ -9,7 +9,6 @@ html {
   flex-wrap: wrap;
 }
 
-/* Stijlen voor elk kunstwerk item */
 .artwork-list-item {
   padding: 15px;
   margin: 10px;
@@ -22,7 +21,6 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Stijlen voor de links */
 .artwork-link {
   text-decoration: none;
   color: #333;
@@ -32,16 +30,14 @@ html {
   text-decoration: underline;
 }
 
-/* Stijlen voor de titels binnen de links */
 .artwork-link h2 {
-  font-size: 20px; /* Aangepast voor consistentie in flex items */
+  font-size: 20px; 
   font-weight: bold;
   margin: 0 0 10px;
 }
 
-/* Responsive design voor kleinere schermen */
 @media (max-width: 768px) {
   .artwork-list-item {
-    flex: 1 1 100%; /* Volle breedte op kleine schermen */
+    flex: 1 1 100%;
   }
 }

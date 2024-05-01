@@ -28,11 +28,14 @@ a:has(article) {
 }
 
 .logout-button {
-  background: none;
+ background-color: lightblue;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
 }
-
 ul {
   list-style-type: none;
   padding: 0;
