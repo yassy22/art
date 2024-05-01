@@ -4,7 +4,28 @@ import { NavLink, Form, useLoaderData } from "react-router-dom";
 
 import "./AuthStatus.css";
 
+const loader = () => {
+  //doesnt work correctly, this component doesnt rerender every click so this doesnt get checked every time it needs to be
+  const user = JSON.parse(localStorage.getItem("user"));
+  const jwt = localStorage.getItem("jwt");
 
+  if (jwt !== null) {
+    const claims = jose.decodeJwt(jwt);
+    const expires = new Date(claims.exp * 1000);
+    if (expires < new Date()) {
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("user");
+      setTimeout(() => {
+        alert("Your session has expired. Please log in again.");
+      }, 100);
+      return redirect("/login");
+    } else {
+      return { user, jwt };
+    }
+  } else {
+    return null;
+  }
+};
 
 const AuthStatus = () => {
   const data = useLoaderData();
@@ -79,4 +100,5 @@ const AuthStatus = () => {
   return <ul className="nav_links">{links}</ul>;
 };
 
+AuthStatus.loader = loader;
 export default AuthStatus;
