@@ -1,0 +1,43 @@
+html {
+  font-size: 16px;
+  color: white;
+}
+
+
+.artwork-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.artwork-list-item {
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.artwork-list-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.artwork-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.artwork-link:hover {
+  text-decoration: underline;
+}
+
+.artwork-link h2 {
+  font-size: 20px; 
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+@media (max-width: 768px) {
+  .artwork-list-item {
+    flex: 1 1 100%;
+  }
+}
