@@ -72,19 +72,27 @@ export const getToken = () => {
 };
 
 
-export const getMe = async () => {
-  const result = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/api/users/me?populate=*`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }
-  ).then((res) => res.json());
 
-  return result;
+
+export const deleteMe = async (id) => {
+  let response;
+  try {
+    response = await fetch(
+      `${import.meta.env.VITE_STRAPI_URL}/api/users/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
+    );
+  }
+  catch (error) {
+    console.log("delete response error", error.response);
+    throw error;
+  }
+  const data = await response.json();
+  if (data.error) {
+    throw data.error;
+  }
 };
 
 

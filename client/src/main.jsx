@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider , redirect} from "react-router-dom";
 import Login from "./routes/auth/login.jsx";
-import Register from "./routes/register";
+import Register from "./routes/auth/register.jsx";
 import { logout } from "./services/auth";
 import { action as destroyAction } from "./routes/destroy";
+import EditArtwork from "./routes/editArtwork.jsx";
 
 
-import Artwork from "./routes/artwork";
+import Artwork from "./routes/artwork/artwork"
 
-import CreateArtwork from "./routes/CreateArtwork";
+import CreateArtwork from "./routes/artwork/CreateArtwork.jsx";
 import ErrorPage from "./error-page.jsx";
 import "./index.css";
 import Index from "./routes/index";
@@ -33,9 +34,16 @@ const router = createBrowserRouter([
         loader: CreateArtwork.loader,
       },
       {
+        path: "/artworks/:id/edit",
+        element: <EditArtwork />,
+        loader: EditArtwork.loader,
+        action: EditArtwork.action,
+      },
+      {
         path: "/artworks/:id",
         element: <Artwork />,
         loader: Artwork.loader,
+        
       },
 
       {

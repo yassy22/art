@@ -5,8 +5,8 @@ import {
   useLocation,
   useNavigation,
 } from "react-router-dom";
-import ErrorField from "../components/ErrorField";
-import { register } from "../services/auth";
+import ErrorField from "../../components/ErrorField";
+import { register } from "../../services/auth";
 import "./register.css";
 
 const action = async ({ request }) => {

@@ -5,24 +5,12 @@ import { getToken } from "./auth";
 const getArtworks = async () => {
   const artworks = await fetchApi({
     endpoint: "artworks",
+    query: { populate: ["user"] },
     wrappedByKey: "data",
   });
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
-
-export async function getArtwork(id) {
-  const artwork = await fetchApi({
-    endpoint: `artworks/${id}`,
-    wrappedByKey: "data",
-  });
-  if (!artwork) return null;
-  const tmp = unwrapAtributes(artwork);
-
-  tmp.items = JSON.parse(tmp.items);
-  tmp.style = JSON.parse(tmp.style);
-  return tmp;
-}
 
 const createArtworks = async (data) => {
   const artwork = await fetchApi(
@@ -41,16 +29,38 @@ const createArtworks = async (data) => {
   return unwrapAtributes(artwork);
 };
 
-const getCheeseById = async (id) => {
+
+const getArtworkById = async (id) => {
   const artwork = await fetchApi({
     endpoint: `artworks/${id}`,
-    query: { populate: ["owner"] },
-    wrappedByKey: undefined,
+    query: { populate: ["user"] },
+    wrappedByKey: "data",
   });
-  return unwrapAtributes(artwork);
+  if (!artwork) return null;
+  const tmp = unwrapAtributes(artwork);
+
+  tmp.items = JSON.parse(tmp.items);
+  tmp.style = JSON.parse(tmp.style);
+  return tmp;
 };
 
 
+const updateArtwork = async (id, data) => {
+  const artwork = await fetchApi(
+    {
+      endpoint: `artworks/${id}`,
+    },
+    {
+      method: "PUT",
+      body: JSON.stringify({ data }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+  return unwrapAtributes(artwork);
+};
 
 export async function deleteArtwork(id) {
   const artwork = await fetchApi(
@@ -61,4 +71,4 @@ export async function deleteArtwork(id) {
   return true;
 }
 
-export { getArtworks, createArtworks, getCheeseById };
+export { getArtworks, createArtworks, getArtworkById, updateArtwork };

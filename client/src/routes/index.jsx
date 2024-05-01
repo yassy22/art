@@ -10,6 +10,7 @@ const loader = async () => {
 
 const Index = () => {
   const { artworks } = useLoaderData();
+
   return (
     <div key={artworks.id} className="artwork-list-container">
       <ul className="artwork-list">
@@ -22,10 +23,14 @@ const Index = () => {
                 {...JSON.parse(artwork.style)}
               />
             </Link>
+            <div>
+              <form action="POST">
+                <button>Like</button>
+              </form>
+            </div>
           </li>
         ))}
       </ul>
-      
     </div>
   );
 };
