@@ -18,7 +18,6 @@ const loader = async ({ request, params }) => {
   if (user.id != artwork.user.data.id) {
     return redirect(`/artworks/${params.id}`);
   }
-
   return { artwork };
 };
 
@@ -32,18 +31,24 @@ const action = async ({ request, params }) => {
 function EditArtwork() {
   const { artwork } = useLoaderData();
   console.log("artwork", artwork);
+  console.log("artwork", artwork);
+  const { style, items, title } = artwork;
+  console.log("title", title);
 
-  const [style, setStyle] = useState({
-    radiusCircle: 10,
-    radiusStars: 2,
-    circleCount: 0,
-    circleColor: "#c3ccdb",
-    numLines: 30,
-    lineWidht: 0.1,
-    id: crypto.getRandomValues(new Uint32Array(1))[0],
+  const [newStyle, setNewStyle] = useState({
+    radiusCircle: style.radiusCircle,
+    radiusStars: style.radiusStars,
+    circleCount: style.circleCount,
+    circleColor: style.circleColor,
+    numLines: style.numLines,
+    lineWidht: style.lineWidht,
   });
 
-  const [items, setItems] = useState([]);
+  console.log("newStyle", newStyle);
+
+  const [newItems, setnewItems] = useState([...items]);
+  const [newTitle, setNewTitle] = useState(title);
+  console.log("newTitle", newTitle);
 
   const generateItem = () => ({
     x1: Math.random() * 800,
@@ -55,37 +60,36 @@ function EditArtwork() {
     id: crypto.getRandomValues(new Uint32Array(1))[0],
   });
 
-  const [title, setTitle] = useState("");
-
   const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+    setNewTitle(event.target.value);
   };
 
   const handleRadiusChange = (radiusCircle) => {
-    setStyle({ ...style, radiusCircle });
+    setNewStyle({ ...newStyle, radiusCircle });
     console.log("radiusCircle", radiusCircle);
   };
 
   const handleChannelChange = (circleCount) => {
-    setStyle({ ...style, circleCount });
+    setNewStyle({ ...newStyle, circleCount });
   };
 
   const handleLineWidhtChange = (lineWidht) => {
-    setStyle({ ...style, lineWidht });
+    setNewStyle({ ...newStyle, lineWidht });
+    console.log("lineWidht", lineWidht);
   };
 
   const handelChangeEtoile = (radiusStars) => {
-    setStyle({ ...style, radiusStars });
+    setNewStyle({ ...newStyle, radiusStars });
   };
 
   const handleAddItem = (e) => {
     e.preventDefault();
-    setItems([...items, generateItem()]);
+    setnewItems([...newItems, generateItem()]);
   };
 
   const handleRemoveItem = (e) => {
     e.preventDefault();
-    setItems(items.slice(0, -1));
+    setnewItems(newItems.slice(0, -1));
   };
 
   const {
@@ -95,10 +99,9 @@ function EditArtwork() {
     circleColor,
     numLines,
     lineWidht,
-  } = style;
+  } = newStyle;
 
-  // console.log("items", style);
-  console.log("circleColor", circleCount);
+  console.log("newItems", newItems);
 
   return (
     <div className="App">
@@ -108,13 +111,17 @@ function EditArtwork() {
           <Form method="POST">
             <input
               name="title"
-              placeholder={title}
-              value={title}
+              placeholder="nieuwe naam"
+              value={newTitle}
               onChange={handleTitleChange}
             />
 
-            <input type="hidden" name="items" value={JSON.stringify(items)} />
-            <input type="hidden" name="style" value={JSON.stringify(style)} />
+            <input
+              type="hidden"
+              name="items"
+              value={JSON.stringify(newItems)}
+            />
+            <input type="hidden" name="style" value={JSON.stringify(newStyle)} />
 
             <div>
               <Slider
@@ -124,14 +131,12 @@ function EditArtwork() {
                 onValueChange={handleChannelChange}
                 className="slider"
               />
-
               <Slider
                 max={100}
                 label="Make circle biger"
                 value={radiusCircle}
                 onValueChange={handleRadiusChange}
               />
-
               <Slider
                 max={100}
                 label="Line widht"
@@ -139,7 +144,6 @@ function EditArtwork() {
                 onValueChange={handleLineWidhtChange}
                 className="slider"
               />
-
               <Slider
                 max={50}
                 label="Let the etoils shine"
@@ -179,8 +183,8 @@ function EditArtwork() {
             circleCount={circleCount} // cirkels
             radiusCircle={radiusCircle} //raduis
             circleColor={circleColor} //kleur
-            radiusStars={radiusStars} // cirkel straal
-            items={items} // items
+            radiusStars={radiusStars} //sterren
+            items={newItems} 
           />
         </div>
       </div>

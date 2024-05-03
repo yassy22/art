@@ -13,14 +13,12 @@ const Root = () => {
   return (
     <>
       <AuthStatus />
-
       <main>
         <Outlet />
       </main>
     </>
   );
 };
-
 Root.loader = loader;
 
 export default Root;

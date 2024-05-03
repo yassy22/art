@@ -1,8 +1,19 @@
 /* App.css */
 html {
-    box-sizing: border-box;
-
+  font-size: 62.5%;
 }
+
+* {
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -79,4 +90,12 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.nav_link_wrapp {
+  background-color: #f5f5f5;
+}
+
+.artwork__link {
+  text-decoration: none;
 }

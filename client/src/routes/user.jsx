@@ -9,14 +9,14 @@ const loader = async ({ params }) => {
 
 const User = () => {
   const { user } = useLoaderData();
-  
 
+  console.log("user", user.createdAt);
   return (
     <div>
-      <h1>{user.username}</h1>
+      <h1> Hello{user.username} dit zijn jou artworks</h1>
       <ul>
         {user.artworks.map((artwork) => (
-          <li key={artwork.id}>
+          <li className="my__artworks__list" key={artwork.id}>
             <Link to={`/artworks/${artwork.id}`}>{artwork.title}</Link>
             {/* <CosmosContainer
               items={JSON.parse(artwork.items)}

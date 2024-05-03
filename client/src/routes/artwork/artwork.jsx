@@ -1,5 +1,5 @@
 import { getArtworkById } from "../../services/artworks";
-
+import "./artwork.css";
 import {
   useLoaderData,
   Form,
@@ -29,24 +29,27 @@ const Artwork = () => {
   return (
     <div>
       <h1>{title}</h1>
-      <CosmosContainer items={items} {...style} />
-
-      {user.id === artwork.user.data.id && (
-        <>
-          <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              if (!confirm("Please confirm you want to delete this record.")) {
-                event.preventDefault();
-              }
-            }}
-          >
-            <button type="submit">Delete</button>
-          </Form>
-        </>
-      )}
+      <CosmosContainer  items={items} {...style} />
+      <div className="user_interaction_button">
+        {user.id === artwork.user.data.id && (
+          <>
+            <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
+            <Form
+              method="post"
+              action="destroy"
+              onSubmit={(event) => {
+                if (
+                  !confirm("Please confirm you want to delete this record.")
+                ) {
+                  event.preventDefault();
+                }
+              }}
+            >
+              <button type="submit">Delete</button>
+            </Form>
+          </>
+        )}
+      </div>
     </div>
   );
 };

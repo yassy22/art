@@ -70,6 +70,9 @@
       "relation": "oneToMany",
       "target": "api::artwork.artwork",
       "mappedBy": "user"
+    },
+    "profileImg": {
+      "type": "json"
     }
   }
 }
