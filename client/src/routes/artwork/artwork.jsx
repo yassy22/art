@@ -41,6 +41,11 @@ const Artwork = () => {
     borderRadius: "10px",
   };
 
+  const title_style = {
+    fontSize: "1em",
+    padding: "10px",
+  };
+
   return (
     <div>
       <ArtworkNavigation
@@ -49,7 +54,10 @@ const Artwork = () => {
         user={user}
       />
       <div style={artworkcontainer}>
-        <h1>{title}</h1>
+        <h1 style={title_style}>
+          {" "}
+          <span>Name artwork: </span>{title}
+        </h1>
         <CosmosContainer items={items} {...style} />
         <div className="user_interaction_button">
           {user.id === artwork.user.data.id && (

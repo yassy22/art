@@ -367,16 +367,36 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
   info: {
     singularName: 'artwork';
     pluralName: 'artworks';
-    displayName: 'Artwork';
+    displayName: 'artwork';
     description: '';
   };
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
-    items: Attribute.JSON;
-    style: Attribute.JSON;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    items: Attribute.JSON &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    style: Attribute.JSON &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     user: Attribute.Relation<
       'api::artwork.artwork',
       'manyToOne',
@@ -396,6 +416,12 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::artwork.artwork',
+      'oneToMany',
+      'api::artwork.artwork'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -807,12 +833,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    profileImg: Attribute.JSON;
     artworks: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',
       'api::artwork.artwork'
     >;
-    profileImg: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

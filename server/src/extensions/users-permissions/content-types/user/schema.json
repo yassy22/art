@@ -65,14 +65,14 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "profileImg": {
+      "type": "json"
+    },
     "artworks": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::artwork.artwork",
       "mappedBy": "user"
-    },
-    "profileImg": {
-      "type": "json"
     }
   }
 }

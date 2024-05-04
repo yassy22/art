@@ -11,14 +11,17 @@ module.exports = createCoreService("api::artwork.artwork", ({ strapi }) => ({
     const user = ctx.state.user;
     const { body } = ctx.request;
 
-    const newArtwork = await strapi.entityService.create("api::artwork.artwork", {
-      data: {
-        ...body.data,
-        user: {
-          set: [user.id],
+    const newArtwork = await strapi.entityService.create(
+      "api::artwork.artwork",
+      {
+        data: {
+          ...body.data,
+          user: {
+            set: [user.id],
+          },
         },
-      },
-    });
+      }
+    );
 
     return { data: newArtwork };
   },

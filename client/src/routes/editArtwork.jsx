@@ -33,7 +33,6 @@ function EditArtwork() {
   console.log("artwork", artwork);
   console.log("artwork", artwork);
   const { style, items, title } = artwork;
-  console.log("title", title);
 
   const [newStyle, setNewStyle] = useState({
     radiusCircle: style.radiusCircle,
@@ -44,11 +43,21 @@ function EditArtwork() {
     lineWidht: style.lineWidht,
   });
 
-  console.log("newStyle", newStyle);
+  const from_styel = {
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  };
+
+  const from__titile__container = {
+    paddingBottom: "10px",
+  };
 
   const [newItems, setnewItems] = useState([...items]);
   const [newTitle, setNewTitle] = useState(title);
-  console.log("newTitle", newTitle);
+
 
   const generateItem = () => ({
     x1: Math.random() * 800,
@@ -92,6 +101,11 @@ function EditArtwork() {
     setnewItems(newItems.slice(0, -1));
   };
 
+ 
+
+
+  console.log("newItems", newTitle);
+
   const {
     radiusCircle,
     radiusStars,
@@ -101,27 +115,35 @@ function EditArtwork() {
     lineWidht,
   } = newStyle;
 
-  console.log("newItems", newItems);
-
   return (
     <div className="App">
       <div className="container">
         <div className="controls">
           <h1 className="title">cosmos</h1>
-          <Form method="POST">
-            <input
-              name="title"
-              placeholder="nieuwe naam"
-              value={newTitle}
-              onChange={handleTitleChange}
-            />
-
+          <Form method="POST" >
+            <div style={from__titile__container}>
+              <input
+                style={from_styel}
+                className="titl__text"
+                type="text"
+                name="title"
+                placeholder="Geef een naam"
+                value={newTitle}
+                onChange={handleTitleChange}
+                required
+              />
+            
+            </div>
             <input
               type="hidden"
               name="items"
               value={JSON.stringify(newItems)}
             />
-            <input type="hidden" name="style" value={JSON.stringify(newStyle)} />
+            <input
+              type="hidden"
+              name="style"
+              value={JSON.stringify(newStyle)}
+            />
 
             <div>
               <Slider
@@ -170,7 +192,7 @@ function EditArtwork() {
             <div>
               <input
                 type="submit"
-                className="button"
+                className="buttonStyle"
                 value="Add this piece of cheese"
               />
             </div>
@@ -184,7 +206,7 @@ function EditArtwork() {
             radiusCircle={radiusCircle} //raduis
             circleColor={circleColor} //kleur
             radiusStars={radiusStars} //sterren
-            items={newItems} 
+            items={newItems}
           />
         </div>
       </div>

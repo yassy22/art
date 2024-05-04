@@ -1,12 +1,11 @@
-'use strict';
+"use strict";
 
 /**
  * artwork controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
 
-
+const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::artwork.artwork", ({ strapi }) => ({
   /**
@@ -15,6 +14,7 @@ module.exports = createCoreController("api::artwork.artwork", ({ strapi }) => ({
    * it overwrites it.
    */
   async create(ctx) {
+    // Creates the new cheese using a service
     const newArtwork = await strapi.service("api::artwork.artwork").create(ctx);
 
     const sanitizedArtwork = await this.sanitizeOutput(newArtwork, ctx);
@@ -22,4 +22,3 @@ module.exports = createCoreController("api::artwork.artwork", ({ strapi }) => ({
     ctx.body = sanitizedArtwork;
   },
 }));
-

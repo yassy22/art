@@ -16,7 +16,6 @@ const loader = async ({ request }) => {
   }
   return null;
 };
-
 const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
@@ -37,6 +36,19 @@ function CreateArtwork() {
   });
 
   const [items, setItems] = useState([]);
+  const [titleError, setTitleError] = useState("");
+
+  const from_styel = {
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  };
+
+  const from__titile__container = {
+    paddingBottom: "10px",
+  };
 
   const generateItem = () => ({
     x1: Math.random() * 800,
@@ -48,18 +60,11 @@ function CreateArtwork() {
     id: crypto.getRandomValues(new Uint32Array(1))[0],
   });
 
-  // const gradient = (
-  //   <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-  //     <stop offset="0%" stopColor="#ffffff" stopOpacity="0.1" />
-  //     <stop offset="50%" stopColor="#ffff00" stopOpacity="0.5" />
-  //     <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
-  //   </linearGradient>
-  // );
-
   const [title, setTitle] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
+    if (titleError) setTitleError("");
   };
 
   const handleRadiusChange = (radiusCircle) => {
@@ -105,16 +110,20 @@ function CreateArtwork() {
         <div className="controls">
           <h1 className="title">cosmos</h1>
           <Form method="POST">
-            <input
-              name="title"
-              placeholder="Geef een naam"
-              value={title}
-              onChange={handleTitleChange}
-            />
-
+            <div style={from__titile__container}>
+              <input
+                style={from_styel}
+                name="title"
+                placeholder="Geef een naam"
+                value={title}
+                onChange={handleTitleChange}
+                required
+              />
+            </div>
+            {titleError && <div className="error">{titleError}</div>}{" "}
+            {/* Display error message if any */}
             <input type="hidden" name="items" value={JSON.stringify(items)} />
             <input type="hidden" name="style" value={JSON.stringify(style)} />
-
             <div>
               <Slider
                 max={33}
@@ -165,7 +174,7 @@ function CreateArtwork() {
             <div>
               <input
                 type="submit"
-                className="button"
+                className="buttonStyle"
                 value="Add this piece of cheese"
               />
             </div>
