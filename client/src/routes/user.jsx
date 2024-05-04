@@ -7,6 +7,19 @@ const loader = async ({ params }) => {
   return { user };
 };
 
+const uers__in = {
+  color: "white",
+  fontSize: "30px",
+  marginTop: "20px",
+  marginBottom: "20px",
+  paddingLeft: "20px",
+};
+
+const link = {
+  color: "white",
+  textDecoration: "underline",
+};
+
 const User = () => {
   const { user } = useLoaderData();
 
@@ -19,9 +32,12 @@ const User = () => {
         </h1>
       </div>
       <ul>
+        <h2 style={uers__in}>hier zijn jou artwork</h2>
         {user.artworks.map((artwork) => (
           <li className="my__artworks__list" key={artwork.id}>
-            <Link to={`/artworks/${artwork.id}`}>{artwork.title}</Link>
+            <Link style={link} to={`/artworks/${artwork.id}`}>
+              {artwork.title}
+            </Link>
             {/* <CosmosContainer
               items={JSON.parse(artwork.items)}
               {...JSON.parse(artwork.style)}
