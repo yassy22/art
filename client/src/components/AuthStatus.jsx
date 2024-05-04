@@ -57,21 +57,23 @@ const AuthStatus = () => {
   } else {
     links = (
       <>
-        <li>
-          <NavLink className="navlink" to="/">
-            EXPLORE
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="navlink" to="/login">
-            LOG IN
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="navlink" to="/register">
-            SIGN UP
-          </NavLink>
-        </li>
+        <ul className="disconect">
+          <li>
+            <NavLink className="navlink_disconect" to="/">
+              EXPLORE
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="navlink_disconect" to="/login">
+              LOG IN
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="navlink_disconect" to="/register">
+              SIGN UP
+            </NavLink>
+          </li>
+        </ul>
       </>
     );
   }

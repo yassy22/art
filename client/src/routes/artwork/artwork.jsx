@@ -1,39 +1,47 @@
-import { getArtworkById } from "../../services/artworks";
-import "./artwork.css";
 import {
   useLoaderData,
   Form,
   useRouteLoaderData,
   Link,
 } from "react-router-dom";
+import { getArtworkById, getArtworks } from "../../services/artworks";
+import "./artwork.css";
+import "../../components/AuthStatus.css";
+
 import CosmosContainer from "../../components/CosmosContainer";
+import ArtworkNavigation from "../../components/ArtworkNavigation";
 //
 import PropTypes from "prop-types";
 
 const loader = async ({ params }) => {
   const artwork = await getArtworkById(params.id);
-
-  return { artwork };
+  const artworks = await getArtworks();
+  return { artwork, artworks };
 };
 
 const Artwork = () => {
   const { artwork } = useLoaderData();
   const { user } = useRouteLoaderData("root");
+  const { artworks } = useLoaderData();
+  console.log(artworks);
 
   // Controleer of alle noodzakelijke data aanwezig is
   if (!user || !artwork || !artwork.user || !artwork.user.data) {
-    return <Link to="/register">Log in for see the artwork</Link>;
+    return <Link to="/login">Log in for see the artwork</Link>;
   }
-
   const { title, items, style } = artwork;
   return (
-    <div>
+    <div className="artwork_container">
+      <ArtworkNavigation currentId={artwork.id} artworks={artworks} />
       <h1>{title}</h1>
-      <CosmosContainer  items={items} {...style} />
+      <CosmosContainer items={items} {...style} />
       <div className="user_interaction_button">
         {user.id === artwork.user.data.id && (
           <>
-            <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
+            <button className="link__edit" type="submit">
+              {" "}
+              <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
+            </button>
             <Form
               method="post"
               action="destroy"
@@ -53,9 +61,7 @@ const Artwork = () => {
     </div>
   );
 };
-
 Artwork.loader = loader;
-
 export default Artwork;
 Artwork.propTypes = {
   artwork: PropTypes.arrayOf(

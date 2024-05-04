@@ -15,8 +15,8 @@ import ErrorPage from "./error-page.jsx";
 import "./index.css";
 import Index from "./routes/index";
 import User from "./routes/user";
-import Root from "./routes/root.jsx";
-
+import Root from "./routes/Root.jsx";
+import "./index.css";
 const router = createBrowserRouter([
   {
     id: "root",

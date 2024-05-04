@@ -1,28 +1,24 @@
-*{
-  font-family:  'Roboto', sans-serif;
- 
-}
+/* * {
+  font-family: "Roboto", sans-serif;
+} */
 
-.nav_link_wrapp{
+.nav_link_wrapp {
   display: flex;
- justify-content: space-between;
+  justify-content: space-between;
   padding: 10px;
-
- 
 }
-.all_links{
+
+.all_links {
   display: flex;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: steelblue;
-   text-align: center;
-   align-items: center;
+  text-align: center;
+  align-items: center;
 }
 
 a:has(article) {
   color: inherit;
 }
-
-
 
 .navlink,
 .logout-button {
@@ -30,18 +26,17 @@ a:has(article) {
 
   text-decoration: none;
   color: inherit;
- 
 }
 
 .navlink.active,
 .logout-button:hover {
   color: #555;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .logout-button {
- background-color: lightblue;
+  background-color: lightblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -54,13 +49,28 @@ ul {
   padding: 0;
 }
 
-
 button {
-   background-color: lightblue;
+  background-color: lightblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   padding: 10px;
   color: white;
   font-weight: bold;
+}
+
+.disconect {
+  display: flex;
+  gap: 50px;
+  padding: 30px;
+  font-family: "Roboto", sans-serif;
+  color: steelblue;
+  background-color: white;
+}
+.navlink_disconect,
+.logout-button {
+  padding: 10px;
+
+  text-decoration: none;
+  color: inherit;
 }

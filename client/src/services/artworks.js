@@ -8,9 +8,14 @@ const getArtworks = async () => {
     query: { populate: ["user"] },
     wrappedByKey: "data",
   });
+
+
   if (!artworks) return [];
   return artworks.map(unwrapAtributes);
 };
+
+
+
 
 const createArtworks = async (data) => {
   const artwork = await fetchApi(
@@ -29,7 +34,6 @@ const createArtworks = async (data) => {
   return unwrapAtributes(artwork);
 };
 
-
 const getArtworkById = async (id) => {
   const artwork = await fetchApi({
     endpoint: `artworks/${id}`,
@@ -43,7 +47,6 @@ const getArtworkById = async (id) => {
   tmp.style = JSON.parse(tmp.style);
   return tmp;
 };
-
 
 const updateArtwork = async (id, data) => {
   const artwork = await fetchApi(

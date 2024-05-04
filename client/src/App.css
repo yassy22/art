@@ -1,17 +1,23 @@
-/* App.css */
-html {
-  font-size: 62.5%;
-}
-
 * {
-  font-size: 20px;
-  font-family: "Roboto", sans-serif;
+  font-size: 19px;
+  font-family: Arial, sans-serif;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+span {
+  color: lightblue;
+  font-weight: bold;
+}
+
+.title_artwork {
+  margin-top: 1rem;
+  text-align: left;
+  text-align: right;
 }
 
 .App {

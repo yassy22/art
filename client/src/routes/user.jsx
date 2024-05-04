@@ -13,7 +13,11 @@ const User = () => {
   console.log("user", user.createdAt);
   return (
     <div>
-      <h1> Hello{user.username} dit zijn jou artworks</h1>
+      <div className="section__user__name">
+        <h1 className="user_name">
+          Hello {user.username} dit zijn jou artworks
+        </h1>
+      </div>
       <ul>
         {user.artworks.map((artwork) => (
           <li className="my__artworks__list" key={artwork.id}>
