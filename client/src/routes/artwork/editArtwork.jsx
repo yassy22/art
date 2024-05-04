@@ -1,11 +1,11 @@
 // App.js
-import "../App.css";
+import "../../App.css";
 import { Form, redirect, useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import Slider from "../components/Slider";
-import CosmosContainer from "../components/CosmosContainer";
-import { getArtworkById, updateArtwork } from "../services/artworks";
-import { getAuthData } from "../services/auth";
+import Slider from "../../components/art/Slider";
+import CosmosContainer from "../../components/art/CosmosContainer";
+import { getArtworkById, updateArtwork } from "../../services/artworks";
+import { getAuthData } from "../../services/auth";
 
 const loader = async ({ request, params }) => {
   const { user } = getAuthData();
@@ -58,7 +58,6 @@ function EditArtwork() {
   const [newItems, setnewItems] = useState([...items]);
   const [newTitle, setNewTitle] = useState(title);
 
-
   const generateItem = () => ({
     x1: Math.random() * 800,
     y1: Math.random() * 800,
@@ -101,9 +100,6 @@ function EditArtwork() {
     setnewItems(newItems.slice(0, -1));
   };
 
- 
-
-
   console.log("newItems", newTitle);
 
   const {
@@ -120,7 +116,7 @@ function EditArtwork() {
       <div className="container">
         <div className="controls">
           <h1 className="title">cosmos</h1>
-          <Form method="POST" >
+          <Form method="POST">
             <div style={from__titile__container}>
               <input
                 style={from_styel}
@@ -132,7 +128,6 @@ function EditArtwork() {
                 onChange={handleTitleChange}
                 required
               />
-            
             </div>
             <input
               type="hidden"
@@ -193,7 +188,7 @@ function EditArtwork() {
               <input
                 type="submit"
                 className="buttonStyle"
-                value="Add this piece of cheese"
+                value="Add a new artwork"
               />
             </div>
           </Form>

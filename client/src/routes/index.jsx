@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { getArtworks } from "../services/artworks";
 import "../index.css";
 
-import CosmosContainer from "../components/CosmosContainer";
+import CosmosContainer from "../components/art/CosmosContainer";
 import "./reset.module.css";
 
 const loader = async () => {

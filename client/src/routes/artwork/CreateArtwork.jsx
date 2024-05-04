@@ -2,8 +2,8 @@
 import "../../App.css";
 import { Form, redirect } from "react-router-dom";
 import { useState } from "react";
-import Slider from "../../components/Slider";
-import CosmosContainer from "../../components/CosmosContainer";
+import Slider from "../../components/art/Slider";
+import CosmosContainer from "../../components/art/CosmosContainer";
 import { createArtworks } from "../../services/artworks";
 import { getAuthData } from "../../services/auth";
 
@@ -175,7 +175,7 @@ function CreateArtwork() {
               <input
                 type="submit"
                 className="buttonStyle"
-                value="Add this piece of cheese"
+                value="Add a new artwork"
               />
             </div>
           </Form>

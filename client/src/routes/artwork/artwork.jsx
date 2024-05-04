@@ -8,7 +8,7 @@ import { getArtworkById, getArtworks } from "../../services/artworks";
 import "./artwork.css";
 import "../../components/AuthStatus.css";
 
-import CosmosContainer from "../../components/CosmosContainer";
+import CosmosContainer from "../../components/art/CosmosContainer";
 import ArtworkNavigation from "../../components/ArtworkNavigation";
 //
 import PropTypes from "prop-types";
@@ -56,7 +56,8 @@ const Artwork = () => {
       <div style={artworkcontainer}>
         <h1 style={title_style}>
           {" "}
-          <span>Name artwork: </span>{title}
+          <span>Name artwork: </span>
+          {title}
         </h1>
         <CosmosContainer items={items} {...style} />
         <div className="user_interaction_button">

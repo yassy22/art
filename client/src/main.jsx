@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider , redirect} from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  redirect,
+} from "react-router-dom";
 import Login from "./routes/auth/login.jsx";
 import Register from "./routes/auth/register.jsx";
 import { logout } from "./services/auth";
 import { action as destroyAction } from "./routes/destroy";
-import EditArtwork from "./routes/editArtwork.jsx";
+import EditArtwork from "./routes/artwork/editArtwork.jsx";
 
-
-import Artwork from "./routes/artwork/artwork"
+import Artwork from "./routes/artwork/artwork";
 
 import CreateArtwork from "./routes/artwork/CreateArtwork.jsx";
 import ErrorPage from "./error-page.jsx";
@@ -32,24 +35,27 @@ const router = createBrowserRouter([
         element: <CreateArtwork />,
         action: CreateArtwork.action,
         loader: CreateArtwork.loader,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/artworks/:id/edit",
         element: <EditArtwork />,
         loader: EditArtwork.loader,
         action: EditArtwork.action,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/artworks/:id",
         element: <Artwork />,
         loader: Artwork.loader,
-        
+        errorElement: <ErrorPage />,
       },
 
       {
         path: "/user/:id",
         element: <User />,
         loader: User.loader,
+        errorElement: <ErrorPage />,
       },
 
       {
@@ -57,6 +63,7 @@ const router = createBrowserRouter([
         element: <Login />,
         action: Login.action,
         loader: Login.loader,
+        errorElement: <ErrorPage />,
       },
 
       {

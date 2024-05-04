@@ -32,7 +32,7 @@ const User = () => {
         </h1>
       </div>
       <ul>
-        <h2 style={uers__in}>hier zijn jou artwork</h2>
+        <h2 style={uers__in}>hier zijn jou artworks!</h2>
         {user.artworks.map((artwork) => (
           <li className="my__artworks__list" key={artwork.id}>
             <Link style={link} to={`/artworks/${artwork.id}`}>

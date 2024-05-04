@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Slider = ({ onValueChange, value, max, min = 0, label }) => {
   return (
     <label>
@@ -14,4 +16,11 @@ const Slider = ({ onValueChange, value, max, min = 0, label }) => {
   );
 };
 
+Slider.propTypes = {
+  onValueChange: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  min: PropTypes.number,
+  label: PropTypes.string.isRequired,
+};
 export default Slider;
