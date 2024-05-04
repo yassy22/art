@@ -30,33 +30,50 @@ const Artwork = () => {
     return <Link to="/login">Log in for see the artwork</Link>;
   }
   const { title, items, style } = artwork;
+
+  const artworkcontainer = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+    margin: "20px",
+    borderRadius: "10px",
+  };
+
   return (
-    <div className="artwork_container">
-      <ArtworkNavigation currentId={artwork.id} artworks={artworks} />
-      <h1>{title}</h1>
-      <CosmosContainer items={items} {...style} />
-      <div className="user_interaction_button">
-        {user.id === artwork.user.data.id && (
-          <>
-            <button className="link__edit" type="submit">
-              {" "}
-              <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
-            </button>
-            <Form
-              method="post"
-              action="destroy"
-              onSubmit={(event) => {
-                if (
-                  !confirm("Please confirm you want to delete this record.")
-                ) {
-                  event.preventDefault();
-                }
-              }}
-            >
-              <button type="submit">Delete</button>
-            </Form>
-          </>
-        )}
+    <div>
+      <ArtworkNavigation
+        currentId={artwork.id}
+        artworks={artworks}
+        user={user}
+      />
+      <div style={artworkcontainer}>
+        <h1>{title}</h1>
+        <CosmosContainer items={items} {...style} />
+        <div className="user_interaction_button">
+          {user.id === artwork.user.data.id && (
+            <>
+              <button className="link__edit" type="submit">
+                {" "}
+                <Link to={`/artworks/${artwork.id}/edit`}>Edit artwork</Link>
+              </button>
+              <Form
+                method="post"
+                action="destroy"
+                onSubmit={(event) => {
+                  if (
+                    !confirm("Please confirm you want to delete this record.")
+                  ) {
+                    event.preventDefault();
+                  }
+                }}
+              >
+                <button type="submit">Delete</button>
+              </Form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

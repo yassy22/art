@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ArtworkNavigation = ({ currentId, artworks }) => {
-  console.log(currentId, currentId);
   const currentIndex = artworks.findIndex(
     (artwork) => artwork.id === currentId
   );
@@ -11,17 +11,32 @@ const ArtworkNavigation = ({ currentId, artworks }) => {
   const previousArtwork = artworks[previousIndex];
   const nextArtwork = artworks[nextIndex];
 
+  const navStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "20px",
+    
+  };
+
+  const linkStyle = {
+    color: "#ddd",
+    textDecoration: "none",
+    fontWeight: "bold",
+    padding: "8px 16px",
+    borderRadius: "4px",
+  };
+
   return (
-    <div className="artwork_navigation">
+    <div style={navStyle}>
       {previousArtwork && (
-        <a href={`/artworks/${previousArtwork.id}`} className="link__previous">
-          Previous
-        </a>
+        <Link style={linkStyle} to={`/artworks/${previousArtwork.id}`}>
+          &lt; Previous
+        </Link>
       )}
       {nextArtwork && (
-        <a href={`/artworks/${nextArtwork.id}`} className="link__next">
-          Next
-        </a>
+        <Link style={linkStyle} to={`/artworks/${nextArtwork.id}`}>
+          Next &gt;
+        </Link>
       )}
     </div>
   );
